@@ -1,16 +1,16 @@
 /*
-*	t‹x‚Ý‰Û‘èuŠtoryv	j1318springkadai.c
+*	æ˜¥ä¼‘ã¿èª²é¡Œã€Œâ™€toryã€	.c
 *
 *	J1318	Takata
-*							•½¬26”N4ŒŽ10“ú
-*							•½¬26”N4ŒŽ24“ú	(VSCOM‘Îí‰æ–Ê‚Ì‰ü‘P, ƒ‹[ƒ‹à–¾2ƒy[ƒW–Ú‚ð‰ü‘P, ƒRƒ“ƒsƒ…[ƒ^‚Ì“Gu‰v‚ªuŠv‚É‹ß‚Ã‚­‚æ‚¤‰ü‘P, VSCOM‘Îíƒ‚[ƒh‚Åuöv‚Æu‰v‚ªd‚È‚Á‚½‚Æ‚«u‰v‚ªÁ‚¦‚éƒoƒO‚ðC³)
+*							å¹³æˆ26å¹´4æœˆ10æ—¥
+*							å¹³æˆ26å¹´4æœˆ24æ—¥	(VSCOMå¯¾æˆ¦ç”»é¢ã®æ”¹å–„, ãƒ«ãƒ¼ãƒ«èª¬æ˜Ž2ãƒšãƒ¼ã‚¸ç›®ã‚’æ”¹å–„, ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿ã®æ•µã€Œâ™‚ã€ãŒã€Œâ™€ã€ã«è¿‘ã¥ãã‚ˆã†æ”¹å–„, VSCOMå¯¾æˆ¦ãƒ¢ãƒ¼ãƒ‰ã§ã€Œâ€¡ã€ã¨ã€Œâ™‚ã€ãŒé‡ãªã£ãŸã¨ãã€Œâ™‚ã€ãŒæ¶ˆãˆã‚‹ãƒã‚°ã‚’ä¿®æ­£)
 *
-*	ƒƒTƒEƒ“ƒhˆø—p„–‚‰¤°
-*	ƒƒvƒƒOƒ‰ƒ€ˆê•”(4s)ŽQl„‚l‚h‚c‚hÄ¶	zahyou.6.ql.bz/cgame/mcisendstring.htm
+*	ï¼œã‚µã‚¦ãƒ³ãƒ‰å¼•ç”¨ï¼žé­”çŽ‹é­‚
+*	ï¼œãƒ—ãƒ­ã‚°ãƒ©ãƒ ä¸€éƒ¨(4è¡Œ)å‚è€ƒï¼žï¼­ï¼©ï¼¤ï¼©å†ç”Ÿ	zahyou.6.ql.bz/cgame/mcisendstring.htm
 */
 
 
-#pragma comment(lib,"winmm")	//winmm.lib‚ðƒŠƒ“ƒN
+#pragma comment(lib,"winmm")	//winmm.libã‚’ãƒªãƒ³ã‚¯
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,7 +18,7 @@
 #include <conio.h>
 #include <mmsystem.h>	//mciSendString()
 
-/*@ƒeƒLƒXƒg‚ÌF(”wŒiF‚Í‘S‚Ä‹­’²”’)@*/
+/*ã€€ãƒ†ã‚­ã‚¹ãƒˆã®è‰²(èƒŒæ™¯è‰²ã¯å…¨ã¦å¼·èª¿ç™½)ã€€*/
 #define TEXT_BLACK SetConsoleTextAttribute( GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_GREEN )
 #define TEXT_IRED SetConsoleTextAttribute( GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_GREEN )
 #define TEXT_RED SetConsoleTextAttribute( GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_GREEN )
@@ -27,23 +27,23 @@
 #define TEXT_IGREEN SetConsoleTextAttribute( GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_GREEN )
 #define TEXT_GREEN SetConsoleTextAttribute( GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN | BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_GREEN )
 
-/*@‰æ–Ê•\Ž¦ƒTƒCƒY@*/
+/*ã€€ç”»é¢è¡¨ç¤ºã‚µã‚¤ã‚ºã€€*/
 #define YSIZE 15
 #define XSIZE 30
-/*@ƒ^ƒCƒgƒ‹‰æ–Ê•\Ž¦@*/
+/*ã€€ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢è¡¨ç¤ºã€€*/
 #define POINTER 1
 #define TITLE 0
-/*@ƒ^ƒCƒgƒ‹‰æ–ÊƒWƒƒƒ“ƒv@*/
+/*ã€€ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã‚¸ãƒ£ãƒ³ãƒ—ã€€*/
 #define RULE 1
 #define STORY 2
 #define BATTLE 3
 #define EXIT 4
-/*@‘Îíƒƒjƒ…[@*/
+/*ã€€å¯¾æˆ¦ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã€€*/
 #define VSCOM 1
 #define VSPLAYER 2
-/*@‰æ–Ê•\Ž¦@*/
+/*ã€€ç”»é¢è¡¨ç¤ºã€€*/
 #define EMPTY 0
-#define OUTEMPTY 1	//i“ü‹ÖŽ~EMPTY
+#define OUTEMPTY 1	//é€²å…¥ç¦æ­¢EMPTY
 #define BROCK 2
 #define MESS 3
 #define OSS 4
@@ -59,21 +59,21 @@
 
 int main()
 {
-	int tx = 0, ty = 0;	//ƒ^ƒCƒgƒ‹‰æ–Êƒ|ƒCƒ“ƒ^[
+	int tx = 0, ty = 0;	//ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ãƒã‚¤ãƒ³ã‚¿ãƒ¼
 	int tx_old, ty_old;
 	int startnum = 0;
-	int bx = 0, by = 0;	//‘Îíƒƒjƒ…[ƒ|ƒCƒ“ƒ^[
+	int bx = 0, by = 0;	//å¯¾æˆ¦ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒã‚¤ãƒ³ã‚¿ãƒ¼
 	int bx_old, by_old;
 	int rulepage = 1;
-	int jumptime;	//ƒWƒƒƒ“ƒvƒ^ƒCƒ€
-	int ossjumptime, m1jumptime, m2jumptime, m3jumptime;	//“GƒWƒƒƒ“ƒvƒ^ƒCƒ€
+	int jumptime;	//ã‚¸ãƒ£ãƒ³ãƒ—ã‚¿ã‚¤ãƒ 
+	int ossjumptime, m1jumptime, m2jumptime, m3jumptime;	//æ•µã‚¸ãƒ£ãƒ³ãƒ—ã‚¿ã‚¤ãƒ 
 	int froor1x = 8;
 	int froor2x = 5;
 	int froor3x = 3;
 	int froor1check;
 	int froor2check;
 	int froor3check;
-	int froorcount = 0;	//ƒtƒƒA(“®‚­°)‚Ì“®‚­ƒ^ƒCƒ~ƒ“ƒO
+	int froorcount = 0;	//ãƒ•ãƒ­ã‚¢(å‹•ãåºŠ)ã®å‹•ãã‚¿ã‚¤ãƒŸãƒ³ã‚°
 	int i;
 	int stagenum = 1;
 	int messx, messy;
@@ -86,148 +86,148 @@ int main()
 	int m1x_old, m1y_old;
 	int m2x_old, m2y_old;
 	int m3x_old, m3y_old;
-	int ossfield_old, m1field_old, m2field_old, m3field_old;	//“G‚ÌˆÚ“®æ‚É‚ ‚Á‚½‚à‚Ì‚ð•Û‘¶
+	int ossfield_old, m1field_old, m2field_old, m3field_old;	//æ•µã®ç§»å‹•å…ˆã«ã‚ã£ãŸã‚‚ã®ã‚’ä¿å­˜
 	int x, y;
-	int r1, r2, r3, or;	//—”
+	int r1, r2, r3, or;	//ä¹±æ•°
 	int key;
 	int whovs;
-	int battleend;	//‘Îí’†Ž~
+	int battleend;	//å¯¾æˆ¦ä¸­æ­¢
 	int point = 0;
 	int savecheck = 0;
 	int savex, savey;
 	int mlife, olife;
 	int getster = 0;
 	int allster = 0;
-	int finish = 0;	//ƒQ[ƒ€ƒNƒŠƒA‚µ‚½‚©‚Ç‚¤‚©
-	int title[4][2] = //ƒ^ƒCƒgƒ‹‰æ–Ê
+	int finish = 0;	//ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢ã—ãŸã‹ã©ã†ã‹
+	int title[4][2] = //ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢
 	{
 		{1,0},
 		{0,0},
 		{0,0},
 		{0,0}
 	};
-	int battlemenu[2][2] = //‘Îíƒƒjƒ…[
+	int battlemenu[2][2] = //å¯¾æˆ¦ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 	{
 		{1,0},
 		{0,0}
 	};
-	int vsc_battlestage[YSIZE][XSIZE] = //‘ÎíƒXƒe[ƒW(VSƒRƒ“ƒsƒ…[ƒ^)
+	int vsc_battlestage[YSIZE][XSIZE] = //å¯¾æˆ¦ã‚¹ãƒ†ãƒ¼ã‚¸(VSã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿)
 	{
-		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},// ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@¡¡¡¡@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@¡¡¡¡¡¡¡¡@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@¡¡¡¡¡¡¡¡¡¡¡¡@@@@@@@@¡
-		{2,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,2},// ¡@@@@@@¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡@@@@@@¡
-		{2,0,3,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,10,2},//¡@Š@@¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡@@‰ö¡
-		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2} // ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
+		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},// â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– â– â– â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– â– â– â– â– â– â– â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– â– â– â– â– â– â– â– â– â– â– â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,3,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,10,2},//â– ã€€â™€ã€€ã€€â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– ã€€ã€€â™‚â€¡â– 
+		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2} // â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
 	};
-	int vsp_battlestage[YSIZE][XSIZE] = //‘ÎíƒXƒe[ƒW(VSƒvƒŒƒCƒ„[)
+	int vsp_battlestage[YSIZE][XSIZE] = //å¯¾æˆ¦ã‚¹ãƒ†ãƒ¼ã‚¸(VSãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼)
 	{
-		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},// ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,2},// ¡@@¡¡¡¡¡@@@@@@@@@@@@@@@@¡¡¡¡@¡
-		{2,0,0,2,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,2},// ¡@@¡@@@¡@@@@@@@@@@@@@@@@@@¡¡@¡
-		{2,0,0,2,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,2},// ¡@@¡@@@¡@@@@@@@@@@@@@@@@@¡¡¡@¡
-		{2,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,0,2,0,2},// ¡@@¡¡¡¡¡@@@@@@@@@@@@¡¡¡¡¡¡@¡@¡
-		{2,0,0,0,0,2,0,0,0,0,0,0,2,2,2,2,2,2,0,0,2,1,1,1,2,0,0,0,0,2},// ¡@@@@¡@@@@@@¡¡¡¡¡¡@@¡@@@¡@@@@¡
-		{2,0,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,2,1,1,1,2,0,0,0,0,2},// ¡@¡¡¡¡¡¡¡@@@@@@@@@@@¡@@@¡@@@@¡
-		{2,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,1,2,0,0,0,0,2},// ¡@@@@¡@@@@@@@@@@@@@@¡@@@¡@@@@¡
-		{2,0,0,0,0,2,0,0,0,0,0,2,2,0,0,0,0,2,2,0,2,2,2,2,2,0,0,0,0,2},// ¡@@@@¡@@@@@¡¡@@@@¡¡@¡¡¡¡¡@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@¡¡¡¡¡@@¡¡¡¡¡@@@@@@@@¡
-		{2,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,2},//¡@Š@@@@@@@@@@@@@@@@@@@@@@@@‰ö¡
-		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2} // ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
+		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},// â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,2},// â– ã€€ã€€â– â– â– â– â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– â– â– â– ã€€â– 
+		{2,0,0,2,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,2},// â– ã€€ã€€â– ã€€ã€€ã€€â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– â– ã€€â– 
+		{2,0,0,2,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,2},// â– ã€€ã€€â– ã€€ã€€ã€€â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– â– â– ã€€â– 
+		{2,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,0,2,0,2},// â– ã€€ã€€â– â– â– â– â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– â– â– â– â– â– ã€€â– ã€€â– 
+		{2,0,0,0,0,2,0,0,0,0,0,0,2,2,2,2,2,2,0,0,2,1,1,1,2,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€â– ã€€ã€€ã€€ã€€ã€€ã€€â– â– â– â– â– â– ã€€ã€€â– ã€€ã€€ã€€â– ã€€ã€€ã€€ã€€â– 
+		{2,0,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,2,1,1,1,2,0,0,0,0,2},// â– ã€€â– â– â– â– â– â– â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– ã€€ã€€ã€€â– ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,1,2,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– ã€€ã€€ã€€â– ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,2,0,0,0,0,0,2,2,0,0,0,0,2,2,0,2,2,2,2,2,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€â– ã€€ã€€ã€€ã€€ã€€â– â– ã€€ã€€ã€€ã€€â– â– ã€€â– â– â– â– â– ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– â– â– â– â– ã€€ã€€â– â– â– â– â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,2},//â– ã€€â™€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â™‚â€¡â– 
+		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2} // â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
 	};
-	int stage1[YSIZE][XSIZE] = //ƒXƒe[ƒW1
+	int stage1[YSIZE][XSIZE] = //ã‚¹ãƒ†ãƒ¼ã‚¸1
 	{
-		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},// ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,9,0,0,5,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@š@@@õ@@™@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,2,2,2,0,2,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@¡¡¡@¡¡¡@¡@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@¡@¡@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@™@@@@@@@¡@¡@@@@@@@@¡
-		{2,0,0,0,0,0,0,5,0,2,2,2,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,2},// ¡@@@@@@™@¡¡¡@@@@@@¡@¡@@@@@@@@¡
-		{2,0,3,0,5,0,2,2,2,2,2,2,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,10,0,2},//¡@Š@™@¡¡¡¡¡¡@@@@@@¡@¡@@@@@@ö@¡
-		{2,2,2,0,2,2,2,2,2,2,2,2,0,0,5,0,0,0,2,0,2,2,2,2,2,7,2,2,2,2},// ¡¡¡@¡¡¡¡¡¡¡¡@@™„v@@¡@¡¡¡¡¡ƒ©¡¡¡¡
-		{2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,0,0,0,0,0,0,0,0,2} // ¡¡¡È¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡È¡@@@@@@@@¡
+		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},// â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,9,0,0,5,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â˜…ã€€ã€€ã€€â€ ã€€ã€€â˜†ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,2,2,2,0,2,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– â– â– ã€€â– â– â– ã€€â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– ã€€â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â˜†ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– ã€€â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,5,0,2,2,2,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€â˜†ã€€â– â– â– ã€€ã€€ã€€ã€€ã€€ã€€â– ã€€â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,3,0,5,0,2,2,2,2,2,2,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,10,0,2},//â– ã€€â™€ã€€â˜†ã€€â– â– â– â– â– â– ã€€ã€€ã€€ã€€ã€€ã€€â– ã€€â– ã€€ã€€ã€€ã€€ã€€ã€€â€¡ã€€â– 
+		{2,2,2,0,2,2,2,2,2,2,2,2,0,0,5,0,0,0,2,0,2,2,2,2,2,7,2,2,2,2},// â– â– â– ã€€â– â– â– â– â– â– â– â– ã€€ã€€â˜†Ñ‘ã€€ã€€â– ã€€â– â– â– â– â– Î›â– â– â– â– 
+		{2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,0,0,0,0,0,0,0,0,2} // â– â– â– âˆ§â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– âˆ§â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
 	};
-	int stage2[YSIZE][XSIZE] = //ƒXƒe[ƒW2
+	int stage2[YSIZE][XSIZE] = //ã‚¹ãƒ†ãƒ¼ã‚¸2
 	{
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,5,0,0,0,5,0,0,0,5,0,0,0,0,0,0,1,0,0,0,0,2},// ¡@@@@@@@@™@@@™@@@™@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,6,0,0,0,0,0,5,0,0,0,5,0,0,0,5,0,0,0,5,0,0,0,0,1,0,0,0,10,2},//¡š„v@@@@™@@@™@@@™@@@™@@@„v@@@@ö¡
-		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,2,2,2,2},// ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡@¡¡¡¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@™@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@¡@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@™@@@@¡
-		{2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,2},// ¡@@@@@¡@@@@@@@@@@@@@@@@@¡@@@@¡
-		{2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,2},// ¡@@@@@¡@@@@@@@@@@@@@@@@™@@@@@¡
-		{2,0,0,0,2,0,2,8,8,8,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2},// ¡@@@¡@¡„ª„ª„ª@@@@@@@@@@@@@¡@@@@@¡
-		{2,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@@@¡@¡@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,3,2,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,2},// ¡Š¡@¡@¡@@@@@@@@@@@@@@@õ@@@@@@¡
-		{2,2,2,7,2,7,2,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,2,2}//  ¡¡¡È¡È¡ÈÈÈÈÈÈÈÈÈÈÈÈÈÈÈ¡¡¡¡¡¡¡¡
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,5,0,0,0,5,0,0,0,5,0,0,0,0,0,0,1,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â˜†ã€€ã€€ã€€â˜†ã€€ã€€ã€€â˜†ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,6,0,0,0,0,0,5,0,0,0,5,0,0,0,5,0,0,0,5,0,0,0,0,1,0,0,0,10,2},//â– â˜…Ñ‘ã€€ã€€ã€€ã€€â˜†ã€€ã€€ã€€â˜†ã€€ã€€ã€€â˜†ã€€ã€€ã€€â˜†ã€€ã€€ã€€Ñ‘ã€€ã€€ã€€ã€€â€¡â– 
+		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,2,2,2,2},// â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– ã€€â– â– â– â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â˜†ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â˜†ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â˜†ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,2,0,2,8,8,8,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2},// â– ã€€ã€€ã€€â– ã€€â– â”â”â”ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€ã€€ã€€â– ã€€â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,3,2,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,2},// â– â™€â– ã€€â– ã€€â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â€ ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,2,2,7,2,7,2,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,2,2}//  â– â– â– âˆ§â– âˆ§â– âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§â– â– â– â– â– â– â– â– 
 	};
-	int stage3[YSIZE][XSIZE] = //ƒXƒe[ƒW3
+	int stage3[YSIZE][XSIZE] = //ã‚¹ãƒ†ãƒ¼ã‚¸3
 	{
-		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},// ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,2},//¡@@@@@@@@@@@@@@@@@@@@@@@@@@@ö¡
-		{2,0,8,8,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2},// ¡@„ª„ª„ª@@@@@@@@@@@@@@@@@@@@¡¡¡¡¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@õ@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@¡¡@@¡
-		{2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,2},// ¡¡@@@@@@@@@@@@@@@@@@@@@@@¡@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,2,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@¡@@¡¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,6,0,0,2},// ¡@‰@@@@@@@@@@@@@@@@@@@@@@¡š@@¡
-		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,2},// ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡@¡
-		{2,0,5,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,2},// ¡@™@@@@@@@@@@@@@@@@@@@@@@™@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2},// ¡@@@@@@@@@@@@@@@@@@@@@@@@@@@¡¡
-		{2,0,3,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡@Š@@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,2,2,2,8,8,8,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡¡¡¡„ª„ª„ª@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// ¡„v„v„v@@@@@@@@@@@@@@@@@@@@@@@@@¡
-		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,2}//  ¡¡¡¡¡¡¡¡¡¡¡¡¡¡ÈÈÈÈÈÈÈÈÈÈÈÈÈÈÈ¡
+		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},// â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,2},//â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â€¡â– 
+		{2,0,8,8,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2},// â– ã€€â”â”â”ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– â– â– â– â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â€ ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– â– ã€€ã€€â– 
+		{2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,2},// â– â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,2,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– ã€€ã€€â– â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,6,0,0,2},// â– ã€€â™‚ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– â˜…ã€€ã€€â– 
+		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,2},// â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– ã€€â– 
+		{2,0,5,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,2},// â– ã€€â˜†ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â˜†ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2},// â– ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– â– 
+		{2,0,3,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– ã€€â™€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,2,2,2,8,8,8,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– â– â– â– â”â”â”ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},// â– Ñ‘Ñ‘Ñ‘ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â– 
+		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,2}//  â– â– â– â– â– â– â– â– â– â– â– â– â– â– âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§âˆ§â– 
 	};
 
-	/*@BGMƒtƒ@ƒCƒ‹ƒI[ƒvƒ“@*/
-	mciSendString("open titlebgm.mp3 alias title", NULL, 0, NULL);		//ƒ^ƒCƒgƒ‹‰æ–Ê
-	mciSendString("open rulebgm.mp3 alias rule", NULL, 0, NULL);		//ƒ‹[ƒ‹à–¾
-	mciSendString("open battlemenubgm.mp3 alias bmenu", NULL, 0, NULL);	//‘Îíƒƒjƒ…[
-	mciSendString("open battlebgm.mp3 alias battle", NULL, 0, NULL);	//‘Îí
-	mciSendString("open story1bgm.mp3 alias story1", NULL, 0, NULL);		//ƒXƒg[ƒŠ[1
-	mciSendString("open story2bgm.mp3 alias story2", NULL, 0, NULL);		//ƒXƒg[ƒŠ[2
-	mciSendString("open story3bgm.mp3 alias story3", NULL, 0, NULL);		//ƒXƒg[ƒŠ[3
+	/*ã€€BGMãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ã€€*/
+	mciSendString("open titlebgm.mp3 alias title", NULL, 0, NULL);		//ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢
+	mciSendString("open rulebgm.mp3 alias rule", NULL, 0, NULL);		//ãƒ«ãƒ¼ãƒ«èª¬æ˜Ž
+	mciSendString("open battlemenubgm.mp3 alias bmenu", NULL, 0, NULL);	//å¯¾æˆ¦ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	mciSendString("open battlebgm.mp3 alias battle", NULL, 0, NULL);	//å¯¾æˆ¦
+	mciSendString("open story1bgm.mp3 alias story1", NULL, 0, NULL);		//ã‚¹ãƒˆãƒ¼ãƒªãƒ¼1
+	mciSendString("open story2bgm.mp3 alias story2", NULL, 0, NULL);		//ã‚¹ãƒˆãƒ¼ãƒªãƒ¼2
+	mciSendString("open story3bgm.mp3 alias story3", NULL, 0, NULL);		//ã‚¹ãƒˆãƒ¼ãƒªãƒ¼3
 
-	/*@Å‘åƒ‹[ƒv(ƒ^ƒCƒgƒ‹‚É–ß‚é, ƒ‹[ƒ‹à–¾‚ÌŽŸ‚Ìƒy[ƒW‚ð•\Ž¦‚·‚é)@*/
+	/*ã€€æœ€å¤§ãƒ«ãƒ¼ãƒ—(ã‚¿ã‚¤ãƒˆãƒ«ã«æˆ»ã‚‹, ãƒ«ãƒ¼ãƒ«èª¬æ˜Žã®æ¬¡ã®ãƒšãƒ¼ã‚¸ã‚’è¡¨ç¤ºã™ã‚‹)ã€€*/
 	while( startnum == TITLE || startnum == RULE )
 	{
 		//=================================================================================================
-		//	ƒ^ƒCƒgƒ‹‰æ–Ê
+		//	ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢
 		//=================================================================================================
 		if( startnum == TITLE )
 		{
 			while(1)
 			{
-				/*@ƒŽQl„BGMƒ‹[ƒvÄ¶@*/
+				/*ã€€ï¼œå‚è€ƒï¼žBGMãƒ«ãƒ¼ãƒ—å†ç”Ÿã€€*/
 				TCHAR BGMStatus[256] = {0};
-				mciSendString("status title mode", BGMStatus, 256, NULL); //BGMó‘Ô‚ÌŽæ“¾
+				mciSendString("status title mode", BGMStatus, 256, NULL); //BGMçŠ¶æ…‹ã®å–å¾—
 				if(lstrcmp(BGMStatus, "stopped") == 0)
-					mciSendString("play title from 0", NULL, 0, NULL); //BGM’âŽ~’†‚È‚çÄ¶
+					mciSendString("play title from 0", NULL, 0, NULL); //BGMåœæ­¢ä¸­ãªã‚‰å†ç”Ÿ
 
-				/*@ƒ^ƒCƒgƒ‹‰æ–ÊEƒL[“ü—Í@*/
+				/*ã€€ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ãƒ»ã‚­ãƒ¼å…¥åŠ›ã€€*/
 				if( kbhit() )
 				{
 					key = getch();
@@ -237,16 +237,16 @@ int main()
 					switch( key )
 					{
 					case '2':
-						PlaySound("menusound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+						PlaySound("menusound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 						ty++;
 						break;
 					case '8':
-						PlaySound("menusound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+						PlaySound("menusound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 						ty--;
 						break;
 					case ' ':
-						PlaySound("decidesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
-						mciSendString("stop title", NULL, 0, NULL);	//BGM’âŽ~
+						PlaySound("decidesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
+						mciSendString("stop title", NULL, 0, NULL);	//BGMåœæ­¢
 						tx++;
 						break;
 					}
@@ -255,15 +255,15 @@ int main()
 				}
 				title[ty][tx] = POINTER;
 
-				/*@ƒ^ƒCƒgƒ‹‰æ–ÊE‰æ–Ê•\Ž¦@*/
+				/*ã€€ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ãƒ»ç”»é¢è¡¨ç¤ºã€€*/
 				TEXT_IRED;
-				printf("\t\t„¬„ª„­\n");
-				printf("\t\t„«@„«\t@@ƒƒXƒg[ƒŠ[\n");
-				printf("\t\t„¯„±„®");TEXT_RED; printf("„°„±„²„¬„ª„­„¬„ª„­„±@„±\n");
+				printf("\t\tâ”â”â”“\n");
+				printf("\t\tâ”ƒã€€â”ƒ\tã€€ã€€ãƒ¡ã‚¹ãƒˆãƒ¼ãƒªãƒ¼\n");
+				printf("\t\tâ”—â”³â”›");TEXT_RED; printf("â”£â”³â”«â”â”â”“â”â”â”“â”³ã€€â”³\n");
 				TEXT_IRED;
-				printf("\t\t„ª„´„ª");TEXT_RED; printf("@„«@„«@„«„°„±„®„¯„±„®\n");
+				printf("\t\tâ”â•‹â”");TEXT_RED; printf("ã€€â”ƒã€€â”ƒã€€â”ƒâ”£â”³â”›â”—â”³â”›\n");
 				TEXT_IRED;
-				printf("\t\t@„«@");TEXT_RED; printf("@„³@„¯„ª„®„³„¯„®@„³@\n");
+				printf("\t\tã€€â”ƒã€€");TEXT_RED; printf("ã€€â”»ã€€â”—â”â”›â”»â”—â”›ã€€â”»ã€€\n");
 
 				TEXT_BLACK;
 				printf("\t\t\t\t\tj1318 Takata Ryosuke\n\n\n");
@@ -276,62 +276,62 @@ int main()
 						{
 						case POINTER:
 							TEXT_BLACK;
-							printf("„");
+							printf("ï¼ž");
 							break;
 						default:
-							printf("@");
+							printf("ã€€");
 							break;
 						}
 
 						if( y == 0 && x == 1 )
 						{
 							TEXT_GREEN;
-							printf("ƒ‹[ƒ‹");
+							printf("ãƒ«ãƒ¼ãƒ«");
 						}
 						if( y == 1 && x == 1 )
 						{
 							TEXT_RED;
-							printf("‘Îí");
+							printf("å¯¾æˆ¦");
 						}
 						if( y == 2 && x == 1 )
 						{
 							TEXT_BLUE;
-							printf("ƒXƒg[ƒŠ[");
+							printf("ã‚¹ãƒˆãƒ¼ãƒªãƒ¼");
 						}
 						if( y == 3 && x == 1 )
 						{
 							TEXT_BLACK;
-							printf("I—¹");
+							printf("çµ‚äº†");
 						}
 					}
 					printf("\n");
 				}
 				printf("\n\n");
-				printf("\t\tª(8)«(2)F‘I‘ð@@ƒXƒy[ƒXƒL[FŒˆ’è\n");
+				printf("\t\tâ†‘(8)â†“(2)ï¼šé¸æŠžã€€ã€€ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ï¼šæ±ºå®š\n");
 
-				/*@ƒy[ƒWƒWƒƒƒ“ƒvˆ—@*/
-				if( title[0][1] == POINTER )	//ƒ‹[ƒ‹à–¾
+				/*ã€€ãƒšãƒ¼ã‚¸ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç†ã€€*/
+				if( title[0][1] == POINTER )	//ãƒ«ãƒ¼ãƒ«èª¬æ˜Ž
 				{
 					startnum = RULE;
 					Sleep( 100 );
 					system("cls");
 					break;
 				}
-				else if( title[1][1] == POINTER )	//‘Îí
+				else if( title[1][1] == POINTER )	//å¯¾æˆ¦
 				{
 					startnum = BATTLE;
 					Sleep( 100 );
 					system("cls");
 					break;
 				}
-				else if( title[2][1] == POINTER )	//ƒXƒg[ƒŠ[
+				else if( title[2][1] == POINTER )	//ã‚¹ãƒˆãƒ¼ãƒªãƒ¼
 				{
 					startnum = STORY;
 					Sleep( 100 );
 					system("cls");
 					break;
 				}
-				else if( title[3][1] == POINTER )	//I—¹
+				else if( title[3][1] == POINTER )	//çµ‚äº†
 				{
 					startnum = EXIT;
 					Sleep( 200 );
@@ -346,98 +346,98 @@ int main()
 		}
 
 		//=================================================================================================
-		//	ƒ‹[ƒ‹à–¾
+		//	ãƒ«ãƒ¼ãƒ«èª¬æ˜Ž
 		//=================================================================================================
 		if( startnum == RULE )
 		{
-			/*@ƒŽQl„BGMÄ¶@*/
+			/*ã€€ï¼œå‚è€ƒï¼žBGMå†ç”Ÿã€€*/
 			TCHAR BGMStatus[256] = {0};
-			mciSendString("status rule mode", BGMStatus, 256, NULL); //BGMó‘Ô‚ÌŽæ“¾
+			mciSendString("status rule mode", BGMStatus, 256, NULL); //BGMçŠ¶æ…‹ã®å–å¾—
 			if(lstrcmp(BGMStatus, "stopped") == 0)
-				mciSendString("play rule from 0", NULL, 0, NULL); //BGM’âŽ~’†‚È‚çÄ¶
+				mciSendString("play rule from 0", NULL, 0, NULL); //BGMåœæ­¢ä¸­ãªã‚‰å†ç”Ÿ
 
 			TEXT_IRED;
-			printf("\t\t„¬„ª„­\n");
-			printf("\t\t„«@„«\t@@ƒƒXƒg[ƒŠ[\n");
-			printf("\t\t„¯„±„®");TEXT_RED;printf("„°„±„²„¬„ª„­„¬„ª„­„±@„±");TEXT_GREEN;printf("@@„­@„«„ª„´@\n");
+			printf("\t\tâ”â”â”“\n");
+			printf("\t\tâ”ƒã€€â”ƒ\tã€€ã€€ãƒ¡ã‚¹ãƒˆãƒ¼ãƒªãƒ¼\n");
+			printf("\t\tâ”—â”³â”›");TEXT_RED;printf("â”£â”³â”«â”â”â”“â”â”â”“â”³ã€€â”³");TEXT_GREEN;printf("ã€€ã€€â”“ã€€â”ƒâ”â•‹ã€€\n");
 			TEXT_IRED;
-			printf("\t\t„ª„´„ª");TEXT_RED;printf("@„«@„«@„«„°„±„®„¯„±„®");TEXT_GREEN;printf("@„¬„³„®„«„¬„´„­\n");
+			printf("\t\tâ”â•‹â”");TEXT_RED;printf("ã€€â”ƒã€€â”ƒã€€â”ƒâ”£â”³â”›â”—â”³â”›");TEXT_GREEN;printf("ã€€â”â”»â”›â”ƒâ”â•‹â”“\n");
 			TEXT_IRED;
-			printf("\t\t@„«@");TEXT_RED;printf("@„³@„¯„ª„®„³„¯„®@„³@");TEXT_GREEN;printf("@„¯„ª„ª„¯„¯„®@\n\n");
+			printf("\t\tã€€â”ƒã€€");TEXT_RED;printf("ã€€â”»ã€€â”—â”â”›â”»â”—â”›ã€€â”»ã€€");TEXT_GREEN;printf("ã€€â”—â”â”â”—â”—â”›ã€€\n\n");
 
 			if( rulepage == 1 )
 			{
 				TEXT_RED;
-				printf("<<‘Îíƒ‚[ƒh>>\n");
-				TEXT_IRED;printf("Š");TEXT_RED;printf("‚Æ");TEXT_IBLUE;printf("‰");TEXT_RED;printf("‚Æ‚ªí‚¤ƒ‚[ƒh‚Å‚·B\n");
-				printf("EVSƒRƒ“ƒsƒ…[ƒ^\n");
-				printf("@@‚ ‚È‚½‚ÆƒRƒ“ƒsƒ…[ƒ^‚Æ‚Åí‚¢‚Ü‚·B\n");
-				printf("@@‚ ‚È‚½‚ªƒRƒ“ƒsƒ…[ƒ^‘¤‚Ìö‚ð3‰ñƒQƒbƒg‚µ‚½‚ç‚ ‚È‚½‚ÌŸ‚¿‚Å‚·B\n");
-				printf("@@");TEXT_IBLUE;printf("‰");TEXT_RED;printf("‚É3‰ñ“–‚½‚Á‚½‚ç‚ ‚È‚½‚Ì•‰‚¯‚Å‚·B\n");
-				printf("EVSƒvƒŒƒCƒ„[\n");
-				printf("@@‚ ‚È‚½‚Æ‚à‚¤ˆêl‚Ì‘ŠŽè‚Æ‚Åí‚¢‚Ü‚·B\n");
-				TEXT_IBLUE;printf("@@‰");TEXT_RED;printf("‚Ìö‚ð3‰ñƒQƒbƒg‚µ‚½‚ç");TEXT_IRED;printf("Š");TEXT_RED;printf("‚ÌŸ‚¿‚Å‚·B\n");
-				TEXT_IBLUE;printf("@@‰");TEXT_RED;printf("‚É3‰ñ“–‚½‚Á‚½‚ç");TEXT_IRED;printf("Š");TEXT_RED;printf("‚Ì•‰‚¯‚Å‚·B\n");
-				printf("‘€ì•û–@‚Í‘Îíƒ‚[ƒh‚ÅŠm”F‚µ‚Ä‚­‚¾‚³‚¢B\n\n");
+				printf("<<å¯¾æˆ¦ãƒ¢ãƒ¼ãƒ‰>>\n");
+				TEXT_IRED;printf("â™€");TEXT_RED;printf("ã¨");TEXT_IBLUE;printf("â™‚");TEXT_RED;printf("ã¨ãŒæˆ¦ã†ãƒ¢ãƒ¼ãƒ‰ã§ã™ã€‚\n");
+				printf("ãƒ»VSã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿\n");
+				printf("ã€€ã€€ã‚ãªãŸã¨ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿ã¨ã§æˆ¦ã„ã¾ã™ã€‚\n");
+				printf("ã€€ã€€ã‚ãªãŸãŒã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿å´ã®â€¡ã‚’3å›žã‚²ãƒƒãƒˆã—ãŸã‚‰ã‚ãªãŸã®å‹ã¡ã§ã™ã€‚\n");
+				printf("ã€€ã€€");TEXT_IBLUE;printf("â™‚");TEXT_RED;printf("ã«3å›žå½“ãŸã£ãŸã‚‰ã‚ãªãŸã®è² ã‘ã§ã™ã€‚\n");
+				printf("ãƒ»VSãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼\n");
+				printf("ã€€ã€€ã‚ãªãŸã¨ã‚‚ã†ä¸€äººã®ç›¸æ‰‹ã¨ã§æˆ¦ã„ã¾ã™ã€‚\n");
+				TEXT_IBLUE;printf("ã€€ã€€â™‚");TEXT_RED;printf("ã®â€¡ã‚’3å›žã‚²ãƒƒãƒˆã—ãŸã‚‰");TEXT_IRED;printf("â™€");TEXT_RED;printf("ã®å‹ã¡ã§ã™ã€‚\n");
+				TEXT_IBLUE;printf("ã€€ã€€â™‚");TEXT_RED;printf("ã«3å›žå½“ãŸã£ãŸã‚‰");TEXT_IRED;printf("â™€");TEXT_RED;printf("ã®è² ã‘ã§ã™ã€‚\n");
+				printf("æ“ä½œæ–¹æ³•ã¯å¯¾æˆ¦ãƒ¢ãƒ¼ãƒ‰ã§ç¢ºèªã—ã¦ãã ã•ã„ã€‚\n\n");
 				TEXT_GREEN;
 				printf("*PRESS SPEAS KEY*\n");
-				if( getch() == ' ' )	//rulepage‚Í•Ï‚í‚é‚ªstartnum‚ÍRULE(1)‚Ì‚Ü‚Ü‚È‚Ì‚ÅAƒ‹[ƒv‚µ‚Ä–ß‚Á‚Ä‚­‚é
+				if( getch() == ' ' )	//rulepageã¯å¤‰ã‚ã‚‹ãŒstartnumã¯RULE(1)ã®ã¾ã¾ãªã®ã§ã€ãƒ«ãƒ¼ãƒ—ã—ã¦æˆ»ã£ã¦ãã‚‹
 				{
 					system("cls");
 					rulepage = 2;
 				}
-				else	//startnum‚ÍRULE(1)‚Ì‚Ü‚Ü‚È‚Ì‚ÅAƒ‹[ƒv‚µ‚Ä–ß‚Á‚Ä‚­‚é
+				else	//startnumã¯RULE(1)ã®ã¾ã¾ãªã®ã§ã€ãƒ«ãƒ¼ãƒ—ã—ã¦æˆ»ã£ã¦ãã‚‹
 					system("cls");
 			}
 			else if( rulepage == 2 )
 			{
 				TEXT_BLUE;
-				printf("<<ƒXƒg[ƒŠ[ƒ‚[ƒh>>\n");
-				TEXT_IRED;printf("Š");TEXT_BLUE;printf("‚ªŽålŒö‚Æ‚È‚Á‚Ä–`Œ¯‚·‚éƒ‚[ƒh‚Å‚·B\n");
-				printf("E‘€ì•û–@\n");
-				printf("@@ˆÚ“®F©(4)E¨(6)\n");
-				printf("@@ƒWƒƒƒ“ƒvFª(8)\n");
-				printf("EƒZ[ƒuƒ|ƒCƒ“ƒg\n");
-				TEXT_IGREEN;printf("@@õ");TEXT_BLUE;printf("‚ðƒQƒbƒg‚·‚é‚Æ\n@@ƒ_ƒ[ƒW‚ðŽó‚¯‚½Žž‚É‚»‚Ì’n“_‚É•œŠˆ‚µ‚Ü‚·B\n");
-				printf("EƒXƒe[ƒWƒNƒŠƒAðŒ\n");
-				TEXT_RED;printf("@@ö");TEXT_BLUE;printf("‚ðƒQƒbƒg‚·‚é‚ÆŽŸ‚ÌƒXƒe[ƒW‚Éi‚Ý‚Ü‚·B\n");
-				printf("EƒQ[ƒ€ƒI[ƒo[ðŒ\n");
-				printf("@@Žc‚èƒ‰ƒCƒt‚ª0‚É‚È‚é‚ÆƒQ[ƒ€ƒI[ƒo[‚Å‚·B\n");
-				printf("E“¾“_•\\n");
-				printf("@@„¬„ª„±„ª„ª„ª„­\n");
-				printf("@@„«");TEXT_GREEN;printf("™");TEXT_BLUE;printf("„«@‚P‚O„«\n");
-				printf("@@„«");TEXT_GREEN;printf("š");TEXT_BLUE;printf("„«‚P‚O‚O„«\n");
-				printf("@@„¯„ª„³„ª„ª„ª„®\n");
+				printf("<<ã‚¹ãƒˆãƒ¼ãƒªãƒ¼ãƒ¢ãƒ¼ãƒ‰>>\n");
+				TEXT_IRED;printf("â™€");TEXT_BLUE;printf("ãŒä¸»äººå…¬ã¨ãªã£ã¦å†’é™ºã™ã‚‹ãƒ¢ãƒ¼ãƒ‰ã§ã™ã€‚\n");
+				printf("ãƒ»æ“ä½œæ–¹æ³•\n");
+				printf("ã€€ã€€ç§»å‹•ï¼šâ†(4)ãƒ»â†’(6)\n");
+				printf("ã€€ã€€ã‚¸ãƒ£ãƒ³ãƒ—ï¼šâ†‘(8)\n");
+				printf("ãƒ»ã‚»ãƒ¼ãƒ–ãƒã‚¤ãƒ³ãƒˆ\n");
+				TEXT_IGREEN;printf("ã€€ã€€â€ ");TEXT_BLUE;printf("ã‚’ã‚²ãƒƒãƒˆã™ã‚‹ã¨\nã€€ã€€ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ãŸæ™‚ã«ãã®åœ°ç‚¹ã«å¾©æ´»ã—ã¾ã™ã€‚\n");
+				printf("ãƒ»ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒªã‚¢æ¡ä»¶\n");
+				TEXT_RED;printf("ã€€ã€€â€¡");TEXT_BLUE;printf("ã‚’ã‚²ãƒƒãƒˆã™ã‚‹ã¨æ¬¡ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã«é€²ã¿ã¾ã™ã€‚\n");
+				printf("ãƒ»ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æ¡ä»¶\n");
+				printf("ã€€ã€€æ®‹ã‚Šãƒ©ã‚¤ãƒ•ãŒ0ã«ãªã‚‹ã¨ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã§ã™ã€‚\n");
+				printf("ãƒ»å¾—ç‚¹è¡¨\n");
+				printf("ã€€ã€€â”â”â”³â”â”â”â”“\n");
+				printf("ã€€ã€€â”ƒ");TEXT_GREEN;printf("â˜†");TEXT_BLUE;printf("â”ƒã€€ï¼‘ï¼â”ƒ\n");
+				printf("ã€€ã€€â”ƒ");TEXT_GREEN;printf("â˜…");TEXT_BLUE;printf("â”ƒï¼‘ï¼ï¼â”ƒ\n");
+				printf("ã€€ã€€â”—â”â”»â”â”â”â”›\n");
 				TEXT_GREEN;
 				printf("*PRESS SPEAS KEY*\n");
 				if( getch() == ' ' )
 				{
-					PlaySound("backsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
-					mciSendString("stop rule", NULL, 0, NULL);	//BGM’âŽ~
+					PlaySound("backsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
+					mciSendString("stop rule", NULL, 0, NULL);	//BGMåœæ­¢
 					system("cls");
 					rulepage = 1;
 					startnum = TITLE;
 				}
-				else	//startnum‚ÍRULE(1)‚Ì‚Ü‚Ü‚È‚Ì‚ÅAƒ‹[ƒv‚µ‚Ä–ß‚Á‚Ä‚­‚é
+				else	//startnumã¯RULE(1)ã®ã¾ã¾ãªã®ã§ã€ãƒ«ãƒ¼ãƒ—ã—ã¦æˆ»ã£ã¦ãã‚‹
 					system("cls");
 			}
 		}
 
 		//=================================================================================================
-		//	‘Îíƒ‚[ƒh
+		//	å¯¾æˆ¦ãƒ¢ãƒ¼ãƒ‰
 		//=================================================================================================
 		if( startnum == BATTLE )
 		{
-			/*@‘Îíƒƒjƒ…[@*/
+			/*ã€€å¯¾æˆ¦ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã€€*/
 			while(1)
 			{
-				/*@ƒŽQl„BGMƒ‹[ƒvÄ¶@*/
+				/*ã€€ï¼œå‚è€ƒï¼žBGMãƒ«ãƒ¼ãƒ—å†ç”Ÿã€€*/
 				TCHAR BGMStatus[256] = {0};
-				mciSendString(TEXT("status bmenu mode"), BGMStatus, 256, NULL); // ó‘Ô‚ÌŽæ“¾
+				mciSendString(TEXT("status bmenu mode"), BGMStatus, 256, NULL); // çŠ¶æ…‹ã®å–å¾—
 				if(lstrcmp(BGMStatus, TEXT("stopped")) == 0)
-					mciSendString(TEXT("play bmenu from 0"), NULL, 0, NULL); // ’âŽ~’†‚È‚ç‰‰‘t
+					mciSendString(TEXT("play bmenu from 0"), NULL, 0, NULL); // åœæ­¢ä¸­ãªã‚‰æ¼”å¥
 
-				/*@‘Îíƒƒjƒ…[EƒL[“ü—Í@*/
+				/*ã€€å¯¾æˆ¦ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ»ã‚­ãƒ¼å…¥åŠ›ã€€*/
 				if( kbhit() )
 				{
 					key = getch();
@@ -447,15 +447,15 @@ int main()
 					switch( key )
 					{
 					case '2':
-						PlaySound("menusound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+						PlaySound("menusound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 						by++;
 						break;
 					case '8':
-						PlaySound("menusound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+						PlaySound("menusound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 						by--;
 						break;
 					case ' ':
-						PlaySound("decidesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+						PlaySound("decidesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 						bx++;
 						break;
 					}
@@ -464,11 +464,11 @@ int main()
 				}
 				battlemenu[by][bx] = POINTER;
 
-				/*@‘Îíƒƒjƒ…[E‰æ–Ê•\Ž¦@*/
+				/*ã€€å¯¾æˆ¦ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ»ç”»é¢è¡¨ç¤ºã€€*/
 				TEXT_RED;
-				printf("\t„¬„ª„ª„ª„ª„ª„ª„­\n");
-				printf("\t„«‘Îíƒƒjƒ…[„«\n");
-				printf("\t„¯„ª„ª„ª„ª„ª„ª„®\n\n");
+				printf("\tâ”â”â”â”â”â”â”â”“\n");
+				printf("\tâ”ƒå¯¾æˆ¦ãƒ¡ãƒ‹ãƒ¥ãƒ¼â”ƒ\n");
+				printf("\tâ”—â”â”â”â”â”â”â”›\n\n");
 				for( y = 0; y < 2; y++ )
 				{
 					printf("\t");
@@ -478,26 +478,26 @@ int main()
 						{
 						case POINTER:
 							TEXT_BLACK;
-							printf("„");
+							printf("ï¼ž");
 							break;
 						default:
-							printf("@");
+							printf("ã€€");
 							break;
 						}
 						TEXT_RED;
 						if( y == 0 && x == 1 )
-							printf("VSƒRƒ“ƒsƒ…[ƒ^");
+							printf("VSã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿");
 						if( y == 1 && x == 1 )
-							printf("VSƒvƒŒƒCƒ„[");
+							printf("VSãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼");
 					}
 					printf("\n");
 				}
 				printf("\n\n");
 				TEXT_BLACK;
-				printf("\t\tª(8)«(2)F‘I‘ð@@ƒXƒy[ƒXƒL[FŒˆ’è\n");
+				printf("\t\tâ†‘(8)â†“(2)ï¼šé¸æŠžã€€ã€€ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ï¼šæ±ºå®š\n");
 
 
-				if( battlemenu[0][1] == POINTER )		//VSƒRƒ“ƒsƒ…[ƒ^
+				if( battlemenu[0][1] == POINTER )		//VSã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿
 				{
 					whovs = VSCOM;
 					Sleep( 100 );
@@ -507,7 +507,7 @@ int main()
 
 					break;
 				}
-				else if( battlemenu[1][1] == POINTER )	//VSƒvƒŒƒCƒ„[
+				else if( battlemenu[1][1] == POINTER )	//VSãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
 				{
 					whovs = VSPLAYER;
 					Sleep( 100 );
@@ -525,64 +525,64 @@ int main()
 				if( whovs == VSCOM )	/*----------VSCOM----------*/
 				{
 					TEXT_RED;
-					printf("\t\t„¬„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„­\n");
-					printf("\t\t„«‘Îíƒ‚[ƒh@VSƒRƒ“ƒsƒ…[ƒ^„«\n");
-					printf("\t\t„¯„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„®\n\n");
-					printf("\t\t‚ ‚È‚½«\tƒRƒ“ƒsƒ…[ƒ^«\n");
+					printf("\t\tâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+					printf("\t\tâ”ƒå¯¾æˆ¦ãƒ¢ãƒ¼ãƒ‰ã€€VSã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿â”ƒ\n");
+					printf("\t\tâ”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”›\n\n");
+					printf("\t\tã‚ãªãŸâ†“\tã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿â†“\n");
 					TEXT_IRED;
-					printf("\t\t@@@Š");TEXT_IBLUE;printf("\t@@@@@@‰\n\n\n");
+					printf("\t\tã€€ã€€ã€€â™€");TEXT_IBLUE;printf("\tã€€ã€€ã€€ã€€ã€€ã€€â™‚\n\n\n");
 					TEXT_RED;
-					printf("\t‘€ì•û–@\n");
-					printf("\t„ª„ª„ª„ª\n");
+					printf("\tæ“ä½œæ–¹æ³•\n");
+					printf("\tâ”â”â”â”\n");
 					TEXT_BLACK;
-					printf("\tˆÚ“®F©(4),¨(6)\n");
-					printf("\tƒWƒƒƒ“ƒvFª(8)\n\n");
+					printf("\tç§»å‹•ï¼šâ†(4),â†’(6)\n");
+					printf("\tã‚¸ãƒ£ãƒ³ãƒ—ï¼šâ†‘(8)\n\n");
 				}
 				else if( whovs == VSPLAYER )	/*----------VSPLAYER----------*/
 				{
 					TEXT_RED;
-					printf("\t\t„¬„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„­\n");
-					printf("\t\t„«‘Îíƒ‚[ƒh@VSƒvƒŒƒCƒ„[„«\n");
-					printf("\t\t„¯„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„®\n\n");
-					printf("\t\t‚P‚o«\t‚Q‚o«\n");
+					printf("\t\tâ”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+					printf("\t\tâ”ƒå¯¾æˆ¦ãƒ¢ãƒ¼ãƒ‰ã€€VSãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼â”ƒ\n");
+					printf("\t\tâ”—â”â”â”â”â”â”â”â”â”â”â”â”â”›\n\n");
+					printf("\t\tï¼‘ï¼°â†“\tï¼’ï¼°â†“\n");
 					TEXT_IRED;
-					printf("\t\t@@Š");TEXT_IBLUE;printf("\t@@‰\n\n\n");
+					printf("\t\tã€€ã€€â™€");TEXT_IBLUE;printf("\tã€€ã€€â™‚\n\n\n");
 					TEXT_RED;
-					printf("\t‘€ì•û–@\n");
-					printf("\t„ª„ª„ª„ª\n");
+					printf("\tæ“ä½œæ–¹æ³•\n");
+					printf("\tâ”â”â”â”\n");
 					TEXT_BLACK;
-					printf("\tƒ‚P‚o„\n");
-					printf("\tˆÚ“®F©(4),¨(6)\n");
-					printf("\tƒWƒƒƒ“ƒvFª(8)\n");
-					printf("\tƒ‚Q‚o„\n");
-					printf("\tˆÚ“®F‚`,‚c\n");
-					printf("\tƒWƒƒƒ“ƒvF‚v\n\n");
+					printf("\tï¼œï¼‘ï¼°ï¼ž\n");
+					printf("\tç§»å‹•ï¼šâ†(4),â†’(6)\n");
+					printf("\tã‚¸ãƒ£ãƒ³ãƒ—ï¼šâ†‘(8)\n");
+					printf("\tï¼œï¼’ï¼°ï¼ž\n");
+					printf("\tç§»å‹•ï¼šï¼¡,ï¼¤\n");
+					printf("\tã‚¸ãƒ£ãƒ³ãƒ—ï¼šï¼·\n\n");
 				}
-				printf("\t’†’fFEscƒL[\n\n\n");
-				printf("\t\t\t\tŠJŽn‚Ü‚Å‚ ‚Æ%d•b\n",i);
+				printf("\tä¸­æ–­ï¼šEscã‚­ãƒ¼\n\n\n");
+				printf("\t\t\t\té–‹å§‹ã¾ã§ã‚ã¨%dç§’\n",i);
 				Sleep( 1000 );
 				system("cls");
 			}
-			mciSendString("stop bmenu", NULL, 0, NULL);	//BGM’âŽ~
+			mciSendString("stop bmenu", NULL, 0, NULL);	//BGMåœæ­¢
 
-			/*@‘Îí@*/
+			/*ã€€å¯¾æˆ¦ã€€*/
 
-			/*@‰Šúˆ—@*/
-			messx = 2, messy = 13;	//Š‰Šú”z’u
+			/*ã€€åˆæœŸå‡¦ç†ã€€*/
+			messx = 2, messy = 13;	//â™€åˆæœŸé…ç½®
 			mlife = 3;
-			ossx = 27, ossy = 13;	//‰‰Šú”z’u
+			ossx = 27, ossy = 13;	//â™‚åˆæœŸé…ç½®
 			olife = 3;
-			battleend = 0;			//’†’f—p•Ï”‚Ì‰Šú‰»
-			jumptime = 0;			//ƒWƒƒƒ“ƒvƒ^ƒCƒ€‰Šú‰»
+			battleend = 0;			//ä¸­æ–­ç”¨å¤‰æ•°ã®åˆæœŸåŒ–
+			jumptime = 0;			//ã‚¸ãƒ£ãƒ³ãƒ—ã‚¿ã‚¤ãƒ åˆæœŸåŒ–
 			ossjumptime = 0;
 
 			while(1)
 			{
-				/*@ƒŽQl„BGMƒ‹[ƒvÄ¶@*/
+				/*ã€€ï¼œå‚è€ƒï¼žBGMãƒ«ãƒ¼ãƒ—å†ç”Ÿã€€*/
 				TCHAR BGMStatus[256] = {0};
-				mciSendString("status battle mode", BGMStatus, 256, NULL); //BGMó‘Ô‚ÌŽæ“¾
+				mciSendString("status battle mode", BGMStatus, 256, NULL); //BGMçŠ¶æ…‹ã®å–å¾—
 				if(lstrcmp(BGMStatus, "stopped") == 0)
-					mciSendString("play battle from 0", NULL, 0, NULL); //BGM’âŽ~’†‚È‚ç‰‰‘t
+					mciSendString("play battle from 0", NULL, 0, NULL); //BGMåœæ­¢ä¸­ãªã‚‰æ¼”å¥
 
 				messx_old = messx;
 				messy_old = messy;
@@ -590,7 +590,7 @@ int main()
 				ossx_old = ossx;
 				ossy_old = ossy;
 
-				/*@ŠˆÚ“®@*/
+				/*ã€€â™€ç§»å‹•ã€€*/
 				if( kbhit() )
 				{
 
@@ -608,7 +608,7 @@ int main()
 						if( whovs == VSCOM )	/*----------VSCOM----------*/
 						{
 							if( vsc_battlestage[messy+1][messx] == BROCK )
-								jumptime = 7;	//ƒWƒƒƒ“ƒvƒ^ƒCƒ€‰Šú‰»
+								jumptime = 7;	//ã‚¸ãƒ£ãƒ³ãƒ—ã‚¿ã‚¤ãƒ åˆæœŸåŒ–
 						}
 						else if( whovs == VSPLAYER )	/*----------VSPLAYER----------*/
 						{
@@ -616,7 +616,7 @@ int main()
 								jumptime = 7;
 						}
 						break;
-						/*@‰ˆÚ“®@*/	/*----------VSPLAYER----------*/
+						/*ã€€â™‚ç§»å‹•ã€€*/	/*----------VSPLAYER----------*/
 					case 'd':
 						if( whovs == VSPLAYER )
 							ossx++;
@@ -633,7 +633,7 @@ int main()
 						}
 						break;
 					case 0x1b:
-						battleend = 1;	//’†’f(1)
+						battleend = 1;	//ä¸­æ–­(1)
 						break;
 					}
 				}
@@ -655,7 +655,7 @@ int main()
 						break;
 					case 3:
 					case 4:
-					case 5:	//1/2‚ÌŠm—¦‚ÅŠ‚É‹ß‚Ã‚­
+					case 5:	//1/2ã®ç¢ºçŽ‡ã§â™€ã«è¿‘ã¥ã
 						if( messx < ossx )
 							ossx--;
 						else if( messx > ossx )
@@ -663,43 +663,43 @@ int main()
 					}
 				}
 
-				/*@ƒWƒƒƒ“ƒvˆ—@*/
-				if( jumptime > 3 )	//Š
+				/*ã€€ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç†ã€€*/
+				if( jumptime > 3 )	//â™€
 				{
-					messy--;	//’µ–ôì—p
+					messy--;	//è·³èºä½œç”¨
 					jumptime--;
 				}
-				if( ossjumptime > 3 )	//‰
+				if( ossjumptime > 3 )	//â™‚
 				{
-					ossy--;	//’µ–ôì—p
+					ossy--;	//è·³èºä½œç”¨
 					ossjumptime--;
 				}
 
 				if( whovs == VSCOM )	/*----------VSCOM----------*/
 				{
-					/*@ƒWƒƒƒ“ƒvˆ—@*/
+					/*ã€€ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç†ã€€*/
 					if( vsc_battlestage[messy+1][messx] != BROCK && jumptime <= 3 )
 					{
-						messy++;	//d—Íì—p
+						messy++;	//é‡åŠ›ä½œç”¨
 						jumptime--;
 					}
 					if( vsc_battlestage[ossy+1][ossx] != BROCK && ossjumptime <= 3 )
 					{
-						ossy++;	//d—Íì—p
+						ossy++;	//é‡åŠ›ä½œç”¨
 						ossjumptime--;
 					}
 
-					/*@ˆÚ“®ˆ—@*/
+					/*ã€€ç§»å‹•å‡¦ç†ã€€*/
 					vsc_battlestage[messy_old][messx_old] = EMPTY;
 
-					switch( vsc_battlestage[messy][messx] )	//Š•Çˆ—
+					switch( vsc_battlestage[messy][messx] )	//â™€å£å‡¦ç†
 					{
 					case BROCK:
 						messx = messx_old;
 						messy = messy_old;
 						break;
 					}
-					switch( vsc_battlestage[ossy][ossx] )	//‰•Çˆ—
+					switch( vsc_battlestage[ossy][ossx] )	//â™‚å£å‡¦ç†
 					{
 					case BROCK:
 						ossx = ossx_old;
@@ -707,18 +707,18 @@ int main()
 						break;
 					}
 
-					ossfield_old = vsc_battlestage[ossy][ossx];	//‰‚ÌˆÚ“®æ‚É‰½‚ª‚ ‚Á‚½‚©‚ð•Û‘¶
+					ossfield_old = vsc_battlestage[ossy][ossx];	//â™‚ã®ç§»å‹•å…ˆã«ä½•ãŒã‚ã£ãŸã‹ã‚’ä¿å­˜
 
-					/*@”»’è@*/
+					/*ã€€åˆ¤å®šã€€*/
 					if( vsc_battlestage[messy][messx] == GOAL )
 					{
-						PlaySound("goalsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+						PlaySound("goalsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 						vsc_battlestage[messy][messx] = CLEAR;
 						olife--;
 					}
 					else if( messx == ossx && messy == ossy )
 					{
-						PlaySound("damagesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+						PlaySound("damagesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 						vsc_battlestage[messy][messx] = DAMAGE;
 						mlife--;
 					}
@@ -730,22 +730,22 @@ int main()
 				}
 				else if( whovs == VSPLAYER )	/*----------VSPLAYER----------*/
 				{
-					/*@ƒWƒƒƒ“ƒvˆ—@*/
-					if( vsp_battlestage[messy+1][messx] != BROCK && jumptime <= 3 )	//d—Íì—p
+					/*ã€€ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç†ã€€*/
+					if( vsp_battlestage[messy+1][messx] != BROCK && jumptime <= 3 )	//é‡åŠ›ä½œç”¨
 					{
-						messy++;	//d—Íì—p
+						messy++;	//é‡åŠ›ä½œç”¨
 						jumptime--;
 					}
-					if( vsp_battlestage[ossy+1][ossx] != BROCK && ossjumptime <= 3 )	//d—Íì—p
+					if( vsp_battlestage[ossy+1][ossx] != BROCK && ossjumptime <= 3 )	//é‡åŠ›ä½œç”¨
 					{
-						ossy++;	//d—Íì—p
+						ossy++;	//é‡åŠ›ä½œç”¨
 						ossjumptime--;
 					}
 
-					/*@ˆÚ“®ˆ—@*/
+					/*ã€€ç§»å‹•å‡¦ç†ã€€*/
 					vsp_battlestage[messy_old][messx_old] = EMPTY;
 
-					switch( vsp_battlestage[messy][messx] )	//Š•Çˆ—
+					switch( vsp_battlestage[messy][messx] )	//â™€å£å‡¦ç†
 					{
 					case BROCK:
 					case OUTEMPTY:
@@ -753,7 +753,7 @@ int main()
 						messy = messy_old;
 						break;
 					}
-					switch( vsp_battlestage[ossy][ossx] )	//‰•Çˆ—
+					switch( vsp_battlestage[ossy][ossx] )	//â™‚å£å‡¦ç†
 					{
 					case BROCK:
 					case OUTEMPTY:
@@ -762,18 +762,18 @@ int main()
 						break;
 					}
 
-					ossfield_old = vsp_battlestage[ossy][ossx];	//‰‚ÌˆÚ“®æ‚É‰½‚ª‚ ‚Á‚½‚©‚ð•Û‘¶
+					ossfield_old = vsp_battlestage[ossy][ossx];	//â™‚ã®ç§»å‹•å…ˆã«ä½•ãŒã‚ã£ãŸã‹ã‚’ä¿å­˜
 
-					/*@”»’è@*/
+					/*ã€€åˆ¤å®šã€€*/
 					if( vsp_battlestage[messy][messx] == GOAL )
 					{
-						PlaySound("goalsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+						PlaySound("goalsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 						vsp_battlestage[messy][messx] = CLEAR;
 						olife--;
 					}
 					else if( messx == ossx && messy == ossy )
 					{
-						PlaySound("damagesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+						PlaySound("damagesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 						vsp_battlestage[messy][messx] = DAMAGE;
 						mlife--;
 					}
@@ -784,10 +784,10 @@ int main()
 					}
 				}
 
-				/*@‰æ–Ê•\Ž¦@*/
-				printf("„¬„ª„ª„ª„ª„ª„±„ª„ª„ª„ª„ª„­\n");
-				printf("„«");TEXT_IRED;printf("Š");TEXT_BLACK;printf("LIFEF%2d„«", mlife);TEXT_IBLUE;printf("‰");TEXT_BLACK;printf("LIFEF%2d„«\n", olife);
-				printf("„¯„ª„ª„ª„ª„ª„³„ª„ª„ª„ª„ª„®\n");
+				/*ã€€ç”»é¢è¡¨ç¤ºã€€*/
+				printf("â”â”â”â”â”â”â”³â”â”â”â”â”â”“\n");
+				printf("â”ƒ");TEXT_IRED;printf("â™€");TEXT_BLACK;printf("LIFEï¼š%2dâ”ƒ", mlife);TEXT_IBLUE;printf("â™‚");TEXT_BLACK;printf("LIFEï¼š%2dâ”ƒ\n", olife);
+				printf("â”—â”â”â”â”â”â”»â”â”â”â”â”â”›\n");
 				for( y = 0; y < YSIZE; y++ )
 				{
 					for( x = 0; x < XSIZE; x++ )
@@ -798,27 +798,27 @@ int main()
 							{
 							case EMPTY:
 							case OUTEMPTY:
-								printf("@");
+								printf("ã€€");
 								break;
 							case BROCK:
 								TEXT_BLACK;
-								printf("¡");
+								printf("â– ");
 								break;
 							case MESS:
 								TEXT_IRED;
-								printf("Š");
+								printf("â™€");
 								break;
 							case OSS:
 								TEXT_IBLUE;
-								printf("‰");
+								printf("â™‚");
 								break;
 							case GOAL:
 								TEXT_RED;
-								printf("ö");
+								printf("â€¡");
 								break;
 							case DAMAGE:
 								TEXT_IRED;
-								printf("‚w");
+								printf("ï¼¸");
 								Sleep( 300 );
 								vsc_battlestage[messy][messx] = EMPTY;
 								messx = 2, messy = 13;
@@ -826,7 +826,7 @@ int main()
 								break;
 							case CLEAR:
 								TEXT_IRED;
-								printf("");
+								printf("â—Ž");
 								Sleep( 300 );
 								vsc_battlestage[messy][messx] = GOAL;
 								messx = 2, messy = 13;
@@ -840,27 +840,27 @@ int main()
 							{
 							case EMPTY:
 							case OUTEMPTY:
-								printf("@");
+								printf("ã€€");
 								break;
 							case BROCK:
 								TEXT_BLACK;
-								printf("¡");
+								printf("â– ");
 								break;
 							case MESS:
 								TEXT_IRED;
-								printf("Š");
+								printf("â™€");
 								break;
 							case OSS:
 								TEXT_IBLUE;
-								printf("‰");
+								printf("â™‚");
 								break;
 							case GOAL:
 								TEXT_RED;
-								printf("ö");
+								printf("â€¡");
 								break;
 							case DAMAGE:
 								TEXT_IRED;
-								printf("‚w");
+								printf("ï¼¸");
 								Sleep( 300 );
 								vsp_battlestage[messy][messx] = EMPTY;
 								messx = 2, messy = 13;
@@ -868,7 +868,7 @@ int main()
 								break;
 							case CLEAR:
 								TEXT_IRED;
-								printf("");
+								printf("â—Ž");
 								Sleep( 300 );
 								vsp_battlestage[messy][messx] = GOAL;
 								messx = 2, messy = 13;
@@ -880,51 +880,51 @@ int main()
 					printf("\n");
 				}
 
-				/*@“G‚ª‚¢‚½êŠ‚É‚ ‚Á‚½‚à‚Ì‚ð–ß‚·@*/
+				/*ã€€æ•µãŒã„ãŸå ´æ‰€ã«ã‚ã£ãŸã‚‚ã®ã‚’æˆ»ã™ã€€*/
 				if( whovs == VSCOM )
 					vsc_battlestage[ossy][ossx] = ossfield_old;
 				else if( whovs == VSPLAYER )
 					vsp_battlestage[ossy][ossx] = ossfield_old;
 
-				/*@I—¹@*/
-				if( mlife == 0 || olife == 0 || battleend )	//Š,‰‚Ìƒ‰ƒCƒt‚ª0‚É‚È‚é‚©’†’f(1)‚³‚ê‚½ê‡‚ÉŽÀs
+				/*ã€€çµ‚äº†ã€€*/
+				if( mlife == 0 || olife == 0 || battleend )	//â™€,â™‚ã®ãƒ©ã‚¤ãƒ•ãŒ0ã«ãªã‚‹ã‹ä¸­æ–­(1)ã•ã‚ŒãŸå ´åˆã«å®Ÿè¡Œ
 				{
-					mciSendString("stop battle", NULL, 0, NULL);	//BGM’âŽ~
+					mciSendString("stop battle", NULL, 0, NULL);	//BGMåœæ­¢
 
-					PlaySound("battlefinishsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+					PlaySound("battlefinishsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 
-					for( i = 0; i < 3; i++ )	//“_–Å
+					for( i = 0; i < 3; i++ )	//ç‚¹æ»…
 					{
 						system("cls");
 						Sleep( 500 );
 						TEXT_GREEN;
-						printf("„¬„ª„­@„±@„¬„­„±@„±@„¬„ª„­„±@„±@„«\n");
-						printf("„°„²@@„«@„«„«„«@„«@„¯„ª„­„°„ª„²@„«\n");
-						printf("„³@@@„³@„³„¯„®@„³@„¯„ª„®„³@„³@š\n");
+						printf("â”â”â”“ã€€â”³ã€€â”â”“â”³ã€€â”³ã€€â”â”â”“â”³ã€€â”³ã€€â”ƒ\n");
+						printf("â”£â”«ã€€ã€€â”ƒã€€â”ƒâ”ƒâ”ƒã€€â”ƒã€€â”—â”â”“â”£â”â”«ã€€â”ƒ\n");
+						printf("â”»ã€€ã€€ã€€â”»ã€€â”»â”—â”›ã€€â”»ã€€â”—â”â”›â”»ã€€â”»ã€€â˜…\n");
 						Sleep( 500 );
 					}
 
 					if( mlife == 0 )
 					{
-						printf("WINNER:");TEXT_IBLUE;printf("‰\n");
+						printf("WINNER:");TEXT_IBLUE;printf("â™‚\n");
 						Sleep( 1000 );
 					}
 					else if( olife == 0 )
 					{
-						printf("WINNER:");TEXT_IRED;printf("Š\n");
+						printf("WINNER:");TEXT_IRED;printf("â™€\n");
 						Sleep( 1000 );
 					}
 
 
 					if( whovs == VSCOM )	/*----------VSCOM----------*/
 					{
-						vsp_battlestage[messy][messx] = EMPTY;	//Š‚ª‚¢‚éÀ•W‚ðEMPTY(0)‚É‚·‚é
-						vsp_battlestage[ossy][ossx] = EMPTY;	//‰‚ª‚¢‚éÀ•W‚ðEMPTY(0)‚É‚·‚é
+						vsp_battlestage[messy][messx] = EMPTY;	//â™€ãŒã„ã‚‹åº§æ¨™ã‚’EMPTY(0)ã«ã™ã‚‹
+						vsp_battlestage[ossy][ossx] = EMPTY;	//â™‚ãŒã„ã‚‹åº§æ¨™ã‚’EMPTY(0)ã«ã™ã‚‹
 					}
 					else if( whovs == VSPLAYER )	/*----------VSPLAYER----------*/
 					{
-						vsp_battlestage[messy][messx] = EMPTY;	//Š‚ª‚¢‚éÀ•W‚ðEMPTY(0)‚É‚·‚é
-						vsp_battlestage[ossy][ossx] = EMPTY;	//‰‚ª‚¢‚éÀ•W‚ðEMPTY(0)‚É‚·‚é
+						vsp_battlestage[messy][messx] = EMPTY;	//â™€ãŒã„ã‚‹åº§æ¨™ã‚’EMPTY(0)ã«ã™ã‚‹
+						vsp_battlestage[ossy][ossx] = EMPTY;	//â™‚ãŒã„ã‚‹åº§æ¨™ã‚’EMPTY(0)ã«ã™ã‚‹
 					}
 
 					startnum = TITLE;
@@ -940,11 +940,11 @@ int main()
 	}
 
 	//=================================================================================================
-	//	ƒXƒg[ƒŠ[
+	//	ã‚¹ãƒˆãƒ¼ãƒªãƒ¼
 	//=================================================================================================
 	while( startnum == STORY )
 	{
-		/*@¯‚Ì””‚¦ã‚°@*/
+		/*ã€€æ˜Ÿã®æ•°æ•°ãˆä¸Šã’ã€€*/
 		for( y = 0; y < YSIZE; y++ )
 		{
 			for( x = 0; x < XSIZE; x++ )
@@ -967,16 +967,16 @@ int main()
 			}
 		}
 
-		/*@‰Šú‰»ˆ—@*/
-		jumptime = 0;	//ƒWƒƒƒ“ƒvƒ^ƒCƒ€‰Šú‰»
+		/*ã€€åˆæœŸåŒ–å‡¦ç†ã€€*/
+		jumptime = 0;	//ã‚¸ãƒ£ãƒ³ãƒ—ã‚¿ã‚¤ãƒ åˆæœŸåŒ–
 		m1jumptime = 0;
 		m2jumptime = 0;
 		m3jumptime = 0;
-		savecheck = 0;	//ƒZ[ƒu‰Šú‰»
-		if( stagenum == 1 )	//ƒ‰ƒCƒt‰Šú‰»
+		savecheck = 0;	//ã‚»ãƒ¼ãƒ–åˆæœŸåŒ–
+		if( stagenum == 1 )	//ãƒ©ã‚¤ãƒ•åˆæœŸåŒ–
 			mlife = 5;
 
-		/*@‰Šú”z’u@*/
+		/*ã€€åˆæœŸé…ç½®ã€€*/
 		if( stagenum == 1 )	/*----------STAGE1----------*/
 		{
 			messx = 2, messy = 12;
@@ -999,30 +999,30 @@ int main()
 
 		while(1)
 		{
-			/*@ƒŽQl„BGMƒ‹[ƒvÄ¶@*/
+			/*ã€€ï¼œå‚è€ƒï¼žBGMãƒ«ãƒ¼ãƒ—å†ç”Ÿã€€*/
 			if( stagenum == 1 )
 			{
 				TCHAR BGMStatus[256] = {0};
-				mciSendString("status story1 mode", BGMStatus, 256, NULL); //BGMó‘Ô‚ÌŽæ“¾
+				mciSendString("status story1 mode", BGMStatus, 256, NULL); //BGMçŠ¶æ…‹ã®å–å¾—
 				if(lstrcmp(BGMStatus, "stopped") == 0)
-					mciSendString("play story1 from 0", NULL, 0, NULL); //BGM’âŽ~’†‚È‚ç‰‰‘t
+					mciSendString("play story1 from 0", NULL, 0, NULL); //BGMåœæ­¢ä¸­ãªã‚‰æ¼”å¥
 			}
 			else if( stagenum == 2 )
 			{
 				TCHAR BGMStatus[256] = {0};
-				mciSendString("status story2 mode", BGMStatus, 256, NULL); //BGMó‘Ô‚ÌŽæ“¾
+				mciSendString("status story2 mode", BGMStatus, 256, NULL); //BGMçŠ¶æ…‹ã®å–å¾—
 				if(lstrcmp(BGMStatus, "stopped") == 0)
-					mciSendString("play story2 from 0", NULL, 0, NULL); //BGM’âŽ~’†‚È‚ç‰‰‘t
+					mciSendString("play story2 from 0", NULL, 0, NULL); //BGMåœæ­¢ä¸­ãªã‚‰æ¼”å¥
 			}
 			else if( stagenum == 3 )
 			{
 				TCHAR BGMStatus[256] = {0};
-				mciSendString("status story3 mode", BGMStatus, 256, NULL); //BGMó‘Ô‚ÌŽæ“¾
+				mciSendString("status story3 mode", BGMStatus, 256, NULL); //BGMçŠ¶æ…‹ã®å–å¾—
 				if(lstrcmp(BGMStatus, "stopped") == 0)
-					mciSendString("play story3 from 0", NULL, 0, NULL); //BGM’âŽ~’†‚È‚ç‰‰‘t
+					mciSendString("play story3 from 0", NULL, 0, NULL); //BGMåœæ­¢ä¸­ãªã‚‰æ¼”å¥
 			}
 
-			/*@ŠˆÚ“®@*/
+			/*ã€€â™€ç§»å‹•ã€€*/
 			messx_old = messx;
 			messy_old = messy;
 
@@ -1056,7 +1056,7 @@ int main()
 					break;
 				}
 			}
-			/*@“GˆÚ“®@*/
+			/*ã€€æ•µç§»å‹•ã€€*/
 			switch( stagenum )
 			{
 			case 3:	/*----------STAGE3----------*/
@@ -1077,14 +1077,14 @@ int main()
 					if( stage3[ossy+1][ossx] == BROCK )
 						ossjumptime = 7;
 					break;
-				case 3:	//1/4‚ÌŠm—¦‚ÅŠ‚É‹ß‚Ã‚­
+				case 3:	//1/4ã®ç¢ºçŽ‡ã§â™€ã«è¿‘ã¥ã
 					if( messx < ossx )
 						ossx--;
 					else if( messx > ossx )
 						ossx++;
 				}
 				r3 = rand() % 3;
-				switch( r3 )	//“G3
+				switch( r3 )	//æ•µ3
 				{
 				case 0:
 					m3x++;
@@ -1101,7 +1101,7 @@ int main()
 				m2x_old = m2x;
 				m2y_old = m2y;
 				r2 = rand() % 3;
-				switch( r2 )	//“G2
+				switch( r2 )	//æ•µ2
 				{
 				case 0:
 					m2x++;
@@ -1126,7 +1126,7 @@ int main()
 				m1x_old = m1x;
 				m1y_old = m1y;
 				r1 = rand() % 3;
-				switch( r1 )	//“G1
+				switch( r1 )	//æ•µ1
 				{
 				case 0:
 					m1x++;
@@ -1155,93 +1155,93 @@ int main()
 				break;
 			}
 
-			/*@ƒWƒƒƒ“ƒvˆ—@*/
-			if( jumptime > 3 )	//ŠƒWƒƒƒ“ƒv
+			/*ã€€ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç†ã€€*/
+			if( jumptime > 3 )	//â™€ã‚¸ãƒ£ãƒ³ãƒ—
 			{
-				messy--;	//’µ–ôì—p
+				messy--;	//è·³èºä½œç”¨
 				jumptime--;
 			}
-			if( ossjumptime > 3 )	//‰ƒWƒƒƒ“ƒv
+			if( ossjumptime > 3 )	//â™‚ã‚¸ãƒ£ãƒ³ãƒ—
 			{
-				ossy--;	//’µ–ôì—p
+				ossy--;	//è·³èºä½œç”¨
 				ossjumptime--;
 			}
-			if( m1jumptime > 2 )	//“G1ƒWƒƒƒ“ƒv
+			if( m1jumptime > 2 )	//æ•µ1ã‚¸ãƒ£ãƒ³ãƒ—
 			{
-				m1y--;	//’µ–ôì—p
+				m1y--;	//è·³èºä½œç”¨
 				m1jumptime--;
 			}
-			if( m2jumptime > 2 )	//“G2ƒWƒƒƒ“ƒv
+			if( m2jumptime > 2 )	//æ•µ2ã‚¸ãƒ£ãƒ³ãƒ—
 			{
-				m2y--;	//’µ–ôì—p
+				m2y--;	//è·³èºä½œç”¨
 				m2jumptime--;
 			}
-			if( m3jumptime > 2 )	//“G3ƒWƒƒƒ“ƒv
+			if( m3jumptime > 2 )	//æ•µ3ã‚¸ãƒ£ãƒ³ãƒ—
 			{
-				m3y--;	//’µ–ôì—p
+				m3y--;	//è·³èºä½œç”¨
 				m3jumptime--;
 			}
 
 			if( stagenum == 1 )	/*----------STAGE1----------*/
 			{
-				/*@ƒWƒƒƒ“ƒvˆ—@*/
+				/*ã€€ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç†ã€€*/
 				if( stage1[messy+1][messx] != BROCK && jumptime <= 3 )
 				{
-					messy++;	//d—Íì—p
+					messy++;	//é‡åŠ›ä½œç”¨
 					jumptime--;
 				}
 				if( stage1[m1y+1][m1x] != BROCK && m1jumptime <= 2 )
 				{
-					m1y++;	//d—Íì—p
+					m1y++;	//é‡åŠ›ä½œç”¨
 					m1jumptime--;
 				}
 
-				/*@Šˆ—@*/
+				/*ã€€â™€å‡¦ç†ã€€*/
 				stage1[messy_old][messx_old] = EMPTY;
 
 				switch( stage1[messy][messx] )
 				{
-				case BROCK:	//•Çˆ—
+				case BROCK:	//å£å‡¦ç†
 					messx = messx_old;
 					messy = messy_old;
 					break;
-				case STER:	//“¾“_
-					PlaySound("getstersound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+				case STER:	//å¾—ç‚¹
+					PlaySound("getstersound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					point += 10;
 					getster++;
 					break;
-				case SSTER:	//“¾“_
-					PlaySound("getsstersound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+				case SSTER:	//å¾—ç‚¹
+					PlaySound("getsstersound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					point += 100;
 					getster++;
 					break;
-				case SAVE:	//ƒZ[ƒuƒ|ƒCƒ“ƒg
-					PlaySound("savesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+				case SAVE:	//ã‚»ãƒ¼ãƒ–ãƒã‚¤ãƒ³ãƒˆ
+					PlaySound("savesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					savecheck = 1;
 					savex = 17, savey = 7;
 					break;
 				}
 
-				/*@“Gˆ—@*/
-				if( stage1[m1y][m1x] == BROCK )	//“G1•Çˆ—
+				/*ã€€æ•µå‡¦ç†ã€€*/
+				if( stage1[m1y][m1x] == BROCK )	//æ•µ1å£å‡¦ç†
 				{
 					m1x = m1x_old;
 					m1y = m1y_old;
 				}
 
-				m1field_old = stage1[m1y][m1x];	//“G‚ÌˆÚ“®æ‚É‰½‚ª‚ ‚é‚©‚ð•Û‘¶
-				if( m1field_old == MESS )		//“G‚ÌˆÚ“®æ‚ªŠ‚¾‚Á‚½ê‡AEMPTY(0)‚ð‘ã“ü
+				m1field_old = stage1[m1y][m1x];	//æ•µã®ç§»å‹•å…ˆã«ä½•ãŒã‚ã‚‹ã‹ã‚’ä¿å­˜
+				if( m1field_old == MESS )		//æ•µã®ç§»å‹•å…ˆãŒâ™€ã ã£ãŸå ´åˆã€EMPTY(0)ã‚’ä»£å…¥
 					m1field_old = EMPTY;
 				stage1[m1y][m1x] = MONSTER;
 
-				if( stage1[messy][messx] == NEEDLE || stage1[messy][messx] == MONSTER )	//“–‚½‚è”»’è
+				if( stage1[messy][messx] == NEEDLE || stage1[messy][messx] == MONSTER )	//å½“ãŸã‚Šåˆ¤å®š
 				{
-					PlaySound("damagesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+					PlaySound("damagesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					stage1[messy][messx] = DAMAGE;
 				}
-				else if( stage1[messy][messx] == GOAL )	//ƒS[ƒ‹”»’è
+				else if( stage1[messy][messx] == GOAL )	//ã‚´ãƒ¼ãƒ«åˆ¤å®š
 				{
-					PlaySound("goalsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+					PlaySound("goalsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					stage1[messy][messx] = CLEAR;
 				}
 				else
@@ -1249,96 +1249,96 @@ int main()
 			}
 			else if( stagenum == 2 )	/*----------STAGE2----------*/
 			{
-				/*@ƒWƒƒƒ“ƒvˆ—@*/
+				/*ã€€ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç†ã€€*/
 				if( stage2[messy+1][messx] != BROCK && stage2[messy+1][messx] != FROOR && jumptime <= 3 )
 				{
-					messy++;	//d—Íì—p
+					messy++;	//é‡åŠ›ä½œç”¨
 					jumptime--;
 				}
 				if( stage2[m1y+1][m1x] != BROCK && m1jumptime <= 2 )
 				{
-					m1y++;	//d—Íì—p
+					m1y++;	//é‡åŠ›ä½œç”¨
 					m1jumptime--;
 				}
 				if( stage2[m2y+1][m2x] != BROCK && m2jumptime <= 2 )
 				{
-					m2y++;	//d—Íì—p
+					m2y++;	//é‡åŠ›ä½œç”¨
 					m2jumptime--;
 				}
 
-				/*@Šˆ—@*/
+				/*ã€€â™€å‡¦ç†ã€€*/
 				stage2[messy_old][messx_old] = EMPTY;
 
 				switch( stage2[messy][messx] )
 				{
-				case BROCK:	//•Çˆ—
+				case BROCK:	//å£å‡¦ç†
 				case FROOR:
 					messx = messx_old;
 					messy = messy_old;
 					break;
-				case STER:	//“¾“_
-					PlaySound("getstersound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+				case STER:	//å¾—ç‚¹
+					PlaySound("getstersound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					point += 10;
 					getster++;
 					break;
-				case SSTER:	//“¾“_
-					PlaySound("getsstersound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+				case SSTER:	//å¾—ç‚¹
+					PlaySound("getsstersound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					point += 100;
 					getster++;
 					break;
-				case SAVE:	//ƒZ[ƒuƒ|ƒCƒ“ƒg
-					PlaySound("savesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+				case SAVE:	//ã‚»ãƒ¼ãƒ–ãƒã‚¤ãƒ³ãƒˆ
+					PlaySound("savesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					savecheck = 1;
 					savex = 22, savey = 13;
 					break;
 				}
 
-				/*@“Gˆ—@*/
-				if( stage2[m1y][m1x] == BROCK || stage2[m1y][m1x] == OUTEMPTY )	//“G1•Çˆ—
+				/*ã€€æ•µå‡¦ç†ã€€*/
+				if( stage2[m1y][m1x] == BROCK || stage2[m1y][m1x] == OUTEMPTY )	//æ•µ1å£å‡¦ç†
 				{
 					m1x = m1x_old;
 					m1y = m1y_old;
 				}
-				if( stage2[m2y][m2x] == BROCK || stage2[m2y][m2x] == OUTEMPTY )	//“G2•Çˆ—
+				if( stage2[m2y][m2x] == BROCK || stage2[m2y][m2x] == OUTEMPTY )	//æ•µ2å£å‡¦ç†
 				{
 					m2x = m2x_old;
 					m2y = m2y_old;
 				}
 
-				m1field_old = stage2[m1y][m1x];	//“G‚ÌˆÚ“®æ‚É‰½‚ª‚ ‚é‚©‚ð•Û‘¶
-				if( m1field_old == MESS )		//“G‚ÌˆÚ“®æ‚ªŠ‚¾‚Á‚½ê‡AEMPTY(0)‚ð‘ã“ü
+				m1field_old = stage2[m1y][m1x];	//æ•µã®ç§»å‹•å…ˆã«ä½•ãŒã‚ã‚‹ã‹ã‚’ä¿å­˜
+				if( m1field_old == MESS )		//æ•µã®ç§»å‹•å…ˆãŒâ™€ã ã£ãŸå ´åˆã€EMPTY(0)ã‚’ä»£å…¥
 					m1field_old = EMPTY;
-				m2field_old = stage2[m2y][m2x];	//“G‚ÌˆÚ“®æ‚É‰½‚ª‚ ‚é‚©‚ð•Û‘¶
-				if( m2field_old == MESS )		//“G‚ÌˆÚ“®æ‚ªŠ‚¾‚Á‚½ê‡AEMPTY(0)‚ð‘ã“ü
+				m2field_old = stage2[m2y][m2x];	//æ•µã®ç§»å‹•å…ˆã«ä½•ãŒã‚ã‚‹ã‹ã‚’ä¿å­˜
+				if( m2field_old == MESS )		//æ•µã®ç§»å‹•å…ˆãŒâ™€ã ã£ãŸå ´åˆã€EMPTY(0)ã‚’ä»£å…¥
 					m2field_old = EMPTY;
 
 				stage2[m1y][m1x] = MONSTER;
 				stage2[m2y][m2x] = MONSTER;
 
-				/*@”»’è@*/
-				if( stage2[messy][messx] == NEEDLE || stage2[messy][messx] == MONSTER )	//“–‚½‚è”»’è
+				/*ã€€åˆ¤å®šã€€*/
+				if( stage2[messy][messx] == NEEDLE || stage2[messy][messx] == MONSTER )	//å½“ãŸã‚Šåˆ¤å®š
 				{
-					PlaySound("damagesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+					PlaySound("damagesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					stage2[messy][messx] = DAMAGE;
 				}
-				else if( stage2[messy][messx] == GOAL )	//ƒS[ƒ‹”»’è
+				else if( stage2[messy][messx] == GOAL )	//ã‚´ãƒ¼ãƒ«åˆ¤å®š
 				{
-					PlaySound("goalsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+					PlaySound("goalsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					stage2[messy][messx] = CLEAR;
 				}
 				else
 					stage2[messy][messx] = MESS;
 
-				/*@ƒtƒƒAˆ—@*/
-				if( froorcount % 5 == 0 )	//0.5•b‚Ý‚Å“®‚­
+				/*ã€€ãƒ•ãƒ­ã‚¢å‡¦ç†ã€€*/
+				if( froorcount % 5 == 0 )	//0.5ç§’åˆ»ã¿ã§å‹•ã
 				{
-					//ˆÚ“®ƒ`ƒFƒbƒN
+					//ç§»å‹•ãƒã‚§ãƒƒã‚¯
 					if( stage2[11][froor1x-2] == BROCK )
 						froor1check = 1;
 					else if( stage2[11][froor1x+2] == BROCK )
 						froor1check = -1;
 
-					//ˆÚ“®ˆ—
+					//ç§»å‹•å‡¦ç†
 					if( froor1check == 1 )
 					{
 						stage2[11][froor1x-1] = EMPTY;
@@ -1355,93 +1355,93 @@ int main()
 			}
 			else if( stagenum == 3 )/*----------STAGE3----------*/
 			{
-				/*@ƒWƒƒƒ“ƒvˆ—@*/
+				/*ã€€ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç†ã€€*/
 				if( stage3[messy+1][messx] != BROCK && stage3[messy+1][messx] != FROOR && jumptime <= 3 )
 				{
-					messy++;	//d—Íì—p
+					messy++;	//é‡åŠ›ä½œç”¨
 					jumptime--;
 				}
 				if( stage3[ossy+1][ossx] != BROCK && stage3[ossy+1][ossx] != FROOR && ossjumptime <= 3 )
 				{
-					ossy++;	//d—Íì—p
+					ossy++;	//é‡åŠ›ä½œç”¨
 					ossjumptime--;
 				}
 				if( stage3[m1y+1][m1x] != BROCK && stage3[m1y+1][m1x] != FROOR && m1jumptime <= 2 )
 				{
-					m1y++;	//d—Íì—p
+					m1y++;	//é‡åŠ›ä½œç”¨
 					m1jumptime--;
 				}
 				if( stage3[m2y+1][m2x] != BROCK && stage3[m2y+1][m2x] != FROOR && m2jumptime <= 2 )
 				{
-					m2y++;	//d—Íì—p
+					m2y++;	//é‡åŠ›ä½œç”¨
 					m2jumptime--;
 				}
 				if( stage3[m3y+1][m3x] != BROCK && stage3[m3y+1][m3x] != FROOR && m3jumptime <= 2 )
 				{
-					m3y++;	//d—Íì—p
+					m3y++;	//é‡åŠ›ä½œç”¨
 					m3jumptime--;
 				}
 
-				/*@Šˆ—@*/
+				/*ã€€â™€å‡¦ç†ã€€*/
 				stage3[messy_old][messx_old] = EMPTY;
 
 				switch( stage3[messy][messx] )
 				{
-				case BROCK:	//•Çˆ—
+				case BROCK:	//å£å‡¦ç†
 				case FROOR:
 					messx = messx_old;
 					messy = messy_old;
 					break;
-				case STER:	//“¾“_
-					PlaySound("getstersound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+				case STER:	//å¾—ç‚¹
+					PlaySound("getstersound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					point += 10;
 					getster++;
 					break;
-				case SSTER:	//“¾“_
-					PlaySound("getsstersound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+				case SSTER:	//å¾—ç‚¹
+					PlaySound("getsstersound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					point += 100;
 					getster++;
 					break;
-				case SAVE:	//ƒZ[ƒuƒ|ƒCƒ“ƒg
-					PlaySound("savesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+				case SAVE:	//ã‚»ãƒ¼ãƒ–ãƒã‚¤ãƒ³ãƒˆ
+					PlaySound("savesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					savecheck = 1;
 					savex = 26, savey = 3;
 					break;
 				}
 
-				/*@“Gˆ—@*/
-				if( stage3[ossy][ossx] == BROCK || stage3[ossy][ossx] == FROOR )	//‰•Çˆ—
+				/*ã€€æ•µå‡¦ç†ã€€*/
+				if( stage3[ossy][ossx] == BROCK || stage3[ossy][ossx] == FROOR )	//â™‚å£å‡¦ç†
 				{
 					ossx = ossx_old;
 					ossy = ossy_old;
 				}
-				if( stage3[m1y][m1x] == BROCK || stage3[m1y][m1x] == FROOR || stage3[m1y][m1x] == OUTEMPTY )	//“G1•Çˆ—
+				if( stage3[m1y][m1x] == BROCK || stage3[m1y][m1x] == FROOR || stage3[m1y][m1x] == OUTEMPTY )	//æ•µ1å£å‡¦ç†
 				{
 					m1x = m1x_old;
 					m1y = m1y_old;
 				}
-				if( stage3[m2y][m2x] == BROCK || stage3[m2y][m2x] == FROOR || stage3[m2y][m2x] == OUTEMPTY )	//“G2•Çˆ—
+				if( stage3[m2y][m2x] == BROCK || stage3[m2y][m2x] == FROOR || stage3[m2y][m2x] == OUTEMPTY )	//æ•µ2å£å‡¦ç†
 				{
 					m2x = m2x_old;
 					m2y = m2y_old;
 				}
-				if( stage3[m3y][m3x] == BROCK || stage3[m3y][m3x] == FROOR || stage3[m2y][m2x] == OUTEMPTY )	//“G3•Çˆ—
+				if( stage3[m3y][m3x] == BROCK || stage3[m3y][m3x] == FROOR || stage3[m2y][m2x] == OUTEMPTY )	//æ•µ3å£å‡¦ç†
 				{
 					m3x = m3x_old;
 					m3y = m3y_old;
 				}
 
-				ossfield_old = stage3[ossy][ossx];	//“G‚ÌˆÚ“®æ‚É‰½‚ª‚ ‚é‚©‚ð•Û‘¶
-				if( ossfield_old == MESS )		//“G‚ÌˆÚ“®æ‚ªŠ‚¾‚Á‚½ê‡AEMPTY(0)‚ð‘ã“ü
+				ossfield_old = stage3[ossy][ossx];	//æ•µã®ç§»å‹•å…ˆã«ä½•ãŒã‚ã‚‹ã‹ã‚’ä¿å­˜
+				if( ossfield_old == MESS )		//æ•µã®ç§»å‹•å…ˆãŒâ™€ã ã£ãŸå ´åˆã€EMPTY(0)ã‚’ä»£å…¥
 					ossfield_old = EMPTY;
-				m1field_old = stage3[m1y][m1x];	//“G‚ÌˆÚ“®æ‚É‰½‚ª‚ ‚é‚©‚ð•Û‘¶
-				if( m1field_old == MESS )		//“G‚ÌˆÚ“®æ‚ªŠ‚¾‚Á‚½ê‡AEMPTY(0)‚ð‘ã“ü
+				m1field_old = stage3[m1y][m1x];	//æ•µã®ç§»å‹•å…ˆã«ä½•ãŒã‚ã‚‹ã‹ã‚’ä¿å­˜
+				if( m1field_old == MESS )		//æ•µã®ç§»å‹•å…ˆãŒâ™€ã ã£ãŸå ´åˆã€EMPTY(0)ã‚’ä»£å…¥
 					m1field_old = EMPTY;
-				m2field_old = stage3[m2y][m2x];	//“G‚ÌˆÚ“®æ‚É‰½‚ª‚ ‚é‚©‚ð•Û‘¶
-				if( m2field_old == MESS )		//“G‚ÌˆÚ“®æ‚ªŠ‚¾‚Á‚½ê‡AEMPTY(0)‚ð‘ã“ü
+				m2field_old = stage3[m2y][m2x];	//æ•µã®ç§»å‹•å…ˆã«ä½•ãŒã‚ã‚‹ã‹ã‚’ä¿å­˜
+				if( m2field_old == MESS )		//æ•µã®ç§»å‹•å…ˆãŒâ™€ã ã£ãŸå ´åˆã€EMPTY(0)ã‚’ä»£å…¥
 					m2field_old = EMPTY;
-				m3field_old = stage3[m3y][m3x];	//“G‚ÌˆÚ“®æ‚É‰½‚ª‚ ‚é‚©‚ð•Û‘¶
-				if( m3field_old == MESS )		//“G‚ÌˆÚ“®æ‚ªŠ‚¾‚Á‚½ê‡AEMPTY(0)‚ð‘ã“ü
+				m3field_old = stage3[m3y][m3x];	//æ•µã®ç§»å‹•å…ˆã«ä½•ãŒã‚ã‚‹ã‹ã‚’ä¿å­˜
+				if( m3field_old == MESS )		//æ•µã®ç§»å‹•å…ˆãŒâ™€ã ã£ãŸå ´åˆã€EMPTY(0)ã‚’ä»£å…¥
 					m3field_old = EMPTY;
 
 				stage3[ossy][ossx] = OSS;
@@ -1449,30 +1449,30 @@ int main()
 				stage3[m2y][m2x] = MONSTER;
 				stage3[m3y][m3x] = MONSTER;
 
-				/*@”»’è@*/
-				if( stage3[messy][messx] == NEEDLE || stage3[messy][messx] == MONSTER || stage3[messy][messx] == OSS )	//“–‚½‚è”»’è
+				/*ã€€åˆ¤å®šã€€*/
+				if( stage3[messy][messx] == NEEDLE || stage3[messy][messx] == MONSTER || stage3[messy][messx] == OSS )	//å½“ãŸã‚Šåˆ¤å®š
 				{
-					PlaySound("damagesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+					PlaySound("damagesound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					stage3[messy][messx] = DAMAGE;
 				}
-				else if( stage3[messy][messx] == GOAL )	//ƒS[ƒ‹”»’è
+				else if( stage3[messy][messx] == GOAL )	//ã‚´ãƒ¼ãƒ«åˆ¤å®š
 				{
-					PlaySound("goalsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+					PlaySound("goalsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 					stage3[messy][messx] = CLEAR;
 				}
 				else
 					stage3[messy][messx] = MESS;
 
-				/*@ƒtƒƒAˆ—@*/
-				if( froorcount % 5 == 0 )	//0.5•b‚Ý‚Å“®‚­
+				/*ã€€ãƒ•ãƒ­ã‚¢å‡¦ç†ã€€*/
+				if( froorcount % 5 == 0 )	//0.5ç§’åˆ»ã¿ã§å‹•ã
 				{
-					//ˆÚ“®ƒ`ƒFƒbƒN
+					//ç§»å‹•ãƒã‚§ãƒƒã‚¯
 					if( stage3[12][froor2x-2] == BROCK )
 						froor2check = 1;
 					else if( stage3[12][froor2x+2] == BROCK )
 						froor2check = -1;
 
-					//ˆÚ“®ˆ—
+					//ç§»å‹•å‡¦ç†
 					if( froor2check == 1 )
 					{
 						stage3[12][froor2x-1] = EMPTY;
@@ -1486,13 +1486,13 @@ int main()
 
 					froor2x += froor2check;
 
-					//ˆÚ“®ƒ`ƒFƒbƒN
+					//ç§»å‹•ãƒã‚§ãƒƒã‚¯
 					if( stage3[2][froor3x-3] == BROCK )
 						froor3check = 1;
 					else if( stage3[2][froor3x+2] == BROCK )
 						froor3check = -1;
 
-					//ˆÚ“®ˆ—
+					//ç§»å‹•å‡¦ç†
 					if( froor3check == 1 )
 					{
 						stage3[2][froor3x-1] = EMPTY;
@@ -1508,10 +1508,10 @@ int main()
 				}
 			}
 
-			/*@‰æ–Ê•\Ž¦@*/
-			printf("„¬„ª„ª„ª„ª„ª„±„ª„ª„ª„ª„­\n");
-			printf("„«POINTF%3d„«LIFEF%2d„«\n",point, mlife);
-			printf("„¯„ª„ª„ª„ª„ª„³„ª„ª„ª„ª„®\n");
+			/*ã€€ç”»é¢è¡¨ç¤ºã€€*/
+			printf("â”â”â”â”â”â”â”³â”â”â”â”â”“\n");
+			printf("â”ƒPOINTï¼š%3dâ”ƒLIFEï¼š%2dâ”ƒ\n",point, mlife);
+			printf("â”—â”â”â”â”â”â”»â”â”â”â”â”›\n");
 			printf("\n");
 			for( y = 0; y < YSIZE; y++ )
 			{
@@ -1523,43 +1523,43 @@ int main()
 						switch( stage1[y][x] )
 						{
 						case EMPTY:
-							printf("@");
+							printf("ã€€");
 							break;
 						case BROCK:
 							TEXT_BLACK;
-							printf("¡");
+							printf("â– ");
 							break;
 						case MESS:
 							TEXT_IRED;
-							printf("Š");
+							printf("â™€");
 							break;
 						case MONSTER:
 							TEXT_IBLUE;
-							printf("„v");
+							printf("Ñ‘");
 							break;
 						case STER:
 							TEXT_GREEN;
-							printf("™");
+							printf("â˜†");
 							break;
 						case SSTER:
 							TEXT_GREEN;
-							printf("š");
+							printf("â˜…");
 							break;
 						case NEEDLE:
 							TEXT_BLACK;
-							printf("ƒ©");
+							printf("Î›");
 							break;
 						case SAVE:
 							TEXT_IGREEN;
-							printf("õ");
+							printf("â€ ");
 							break;
 						case GOAL:
 							TEXT_RED;
-							printf("ö");
+							printf("â€¡");
 							break;
 						case DAMAGE:
 							TEXT_IRED;
-							printf("‚w");
+							printf("ï¼¸");
 							mlife--;
 							stage1[messy][messx] = NEEDLE;
 							if( savecheck == 1 )
@@ -1569,7 +1569,7 @@ int main()
 							break;
 						case CLEAR:
 							TEXT_IRED;
-							printf("");
+							printf("â—Ž");
 							break;
 						}
 					}
@@ -1579,47 +1579,47 @@ int main()
 						{
 						case EMPTY:
 						case OUTEMPTY:
-							printf("@");
+							printf("ã€€");
 							break;
 						case BROCK:
 							TEXT_BLACK;
-							printf("¡");
+							printf("â– ");
 							break;
 						case MESS:
 							TEXT_IRED;
-							printf("Š");
+							printf("â™€");
 							break;
 						case MONSTER:
 							TEXT_IBLUE;
-							printf("„v");
+							printf("Ñ‘");
 							break;
 						case STER:
 							TEXT_GREEN;
-							printf("™");
+							printf("â˜†");
 							break;
 						case SSTER:
 							TEXT_GREEN;
-							printf("š");
+							printf("â˜…");
 							break;
 						case NEEDLE:
 							TEXT_BLACK;
-							printf("ƒ©");
+							printf("Î›");
 							break;
 						case FROOR:
 							TEXT_BLACK;
-							printf("„ª");
+							printf("â”");
 							break;
 						case SAVE:
 							TEXT_IGREEN;
-							printf("õ");
+							printf("â€ ");
 							break;
 						case GOAL:
 							TEXT_RED;
-							printf("ö");
+							printf("â€¡");
 							break;
 						case DAMAGE:
 							TEXT_IRED;
-							printf("‚w");
+							printf("ï¼¸");
 							mlife--;
 							stage2[messy][messx] = NEEDLE;
 							if( savecheck == 1 )
@@ -1629,7 +1629,7 @@ int main()
 							break;
 						case CLEAR:
 							TEXT_IRED;
-							printf("");
+							printf("â—Ž");
 							break;
 						}
 					}
@@ -1639,51 +1639,51 @@ int main()
 						{
 						case EMPTY:
 						case OUTEMPTY:
-							printf("@");
+							printf("ã€€");
 							break;
 						case BROCK:
 							TEXT_BLACK;
-							printf("¡");
+							printf("â– ");
 							break;
 						case MESS:
 							TEXT_IRED;
-							printf("Š");
+							printf("â™€");
 							break;
 						case OSS:
 							TEXT_IBLUE;
-							printf("‰");
+							printf("â™‚");
 							break;
 						case MONSTER:
 							TEXT_IBLUE;
-							printf("„v");
+							printf("Ñ‘");
 							break;
 						case STER:
 							TEXT_GREEN;
-							printf("™");
+							printf("â˜†");
 							break;
 						case SSTER:
 							TEXT_GREEN;
-							printf("š");
+							printf("â˜…");
 							break;
 						case NEEDLE:
 							TEXT_BLACK;
-							printf("ƒ©");
+							printf("Î›");
 							break;
 						case FROOR:
 							TEXT_BLACK;
-							printf("„ª");
+							printf("â”");
 							break;
 						case SAVE:
 							TEXT_IGREEN;
-							printf("õ");
+							printf("â€ ");
 							break;
 						case GOAL:
 							TEXT_RED;
-							printf("ö");
+							printf("â€¡");
 							break;
 						case DAMAGE:
 							TEXT_IRED;
-							printf("‚w");
+							printf("ï¼¸");
 							mlife--;
 							stage3[messy][messx] = NEEDLE;
 							if( savecheck == 1 )
@@ -1693,7 +1693,7 @@ int main()
 							break;
 						case CLEAR:
 							TEXT_IRED;
-							printf("");
+							printf("â—Ž");
 							break;
 						}
 					}
@@ -1702,7 +1702,7 @@ int main()
 			}
 			printf("\n");
 
-			/*@“G‚ª‚¢‚éêŠ‚É‚à‚Æ‚à‚Æ‚ ‚Á‚½‚à‚Ì‚ð–ß‚·ˆ—@*/
+			/*ã€€æ•µãŒã„ã‚‹å ´æ‰€ã«ã‚‚ã¨ã‚‚ã¨ã‚ã£ãŸã‚‚ã®ã‚’æˆ»ã™å‡¦ç†ã€€*/
 			if( stagenum == 1 )	/*----------STAGE1----------*/
 				stage1[m1y][m1x] = m1field_old;
 			else if( stagenum == 2 )	/*----------STAGE2----------*/
@@ -1718,42 +1718,42 @@ int main()
 				stage3[m3y][m3x] = m3field_old;
 			}
 
-			/*@ƒQ[ƒ€ƒI[ƒo[@*/
+			/*ã€€ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã€€*/
 			if( mlife == 0 )
 			{
 				if( stagenum == 1 )
-					mciSendString("stop story1", NULL, 0, NULL);	//BGM’âŽ~
+					mciSendString("stop story1", NULL, 0, NULL);	//BGMåœæ­¢
 				else if( stagenum == 2 )
-					mciSendString("stop story2", NULL, 0, NULL);	//BGM’âŽ~
+					mciSendString("stop story2", NULL, 0, NULL);	//BGMåœæ­¢
 				else if( stagenum == 3 )
-					mciSendString("stop story3", NULL, 0, NULL);	//BGM’âŽ~
+					mciSendString("stop story3", NULL, 0, NULL);	//BGMåœæ­¢
 
-				PlaySound("gameoversound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+				PlaySound("gameoversound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 
-				for( i = 0; i < 3; i++ )	//“_–Å
+				for( i = 0; i < 3; i++ )	//ç‚¹æ»…
 				{
 					system("cls");
 					Sleep( 500 );
 					TEXT_IBLUE;
-					printf("„¬„ª„­„¬„ª„­„¬„±„­„¬„ª„²@„¬„ª„­„±@„±„¬„ª„²„¬„ª„­„«\n");
-					printf("„«@„­„°„ª„²„«„«„«„°„ª@@„«@„«„«@„«„°„ª@„°„±„®„«\n");
-					printf("„¯„ª„®„³@„³„³@„³„¯„ª„²@„¯„ª„®„¯„ª„®„¯„ª„²„³„¯„®š\n");
+					printf("â”â”â”“â”â”â”“â”â”³â”“â”â”â”«ã€€â”â”â”“â”³ã€€â”³â”â”â”«â”â”â”“â”ƒ\n");
+					printf("â”ƒã€€â”“â”£â”â”«â”ƒâ”ƒâ”ƒâ”£â”ã€€ã€€â”ƒã€€â”ƒâ”ƒã€€â”ƒâ”£â”ã€€â”£â”³â”›â”ƒ\n");
+					printf("â”—â”â”›â”»ã€€â”»â”»ã€€â”»â”—â”â”«ã€€â”—â”â”›â”—â”â”›â”—â”â”«â”»â”—â”›â˜…\n");
 					Sleep( 500 );
 					startnum = EXIT;
 				}
-				break;	//ŒJ‚è•Ô‚µ‚©‚ç”²‚¯‚é
+				break;	//ç¹°ã‚Šè¿”ã—ã‹ã‚‰æŠœã‘ã‚‹
 			}
 
-			/*@ƒXƒe[ƒWƒNƒŠƒA@*/
+			/*ã€€ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒªã‚¢ã€€*/
 			if( stagenum == 1 )
 			{
 				if( stage1[messy][messx] == CLEAR )
 				{
 					Sleep( 2500 );
 					system("cls");
-					mciSendString("stop story1", NULL, 0, NULL);	//BGM’âŽ~
+					mciSendString("stop story1", NULL, 0, NULL);	//BGMåœæ­¢
 					stagenum = 2;
-					break;	//ŒJ‚è•Ô‚µ‚©‚ç”²‚¯‚é
+					break;	//ç¹°ã‚Šè¿”ã—ã‹ã‚‰æŠœã‘ã‚‹
 				}
 			}
 			else if( stagenum == 2 )
@@ -1762,9 +1762,9 @@ int main()
 				{
 					Sleep( 2500 );
 					system("cls");
-					mciSendString("stop story2", NULL, 0, NULL);	//BGM’âŽ~
+					mciSendString("stop story2", NULL, 0, NULL);	//BGMåœæ­¢
 					stagenum = 3;
-					break;	//ŒJ‚è•Ô‚µ‚©‚ç”²‚¯‚é
+					break;	//ç¹°ã‚Šè¿”ã—ã‹ã‚‰æŠœã‘ã‚‹
 				}
 			}
 			else if( stagenum == 3 )
@@ -1773,46 +1773,46 @@ int main()
 				{
 					Sleep( 2500 );
 					system("cls");
-					mciSendString("stop story3", NULL, 0, NULL);	//BGM’âŽ~
+					mciSendString("stop story3", NULL, 0, NULL);	//BGMåœæ­¢
 					startnum = EXIT;
-					finish = 1;	//ƒQ[ƒ€ƒNƒŠƒA
-					break;	//ŒJ‚è•Ô‚µ‚©‚ç”²‚¯‚é
+					finish = 1;	//ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢
+					break;	//ç¹°ã‚Šè¿”ã—ã‹ã‚‰æŠœã‘ã‚‹
 				}
 			}
 
 			Sleep( 100 );
 			system("cls");
 
-			if( stagenum == 2 || stagenum == 3 )	//ƒtƒƒAƒJƒEƒ“ƒg‚ð1‚¸‚Â‘‚â‚·
+			if( stagenum == 2 || stagenum == 3 )	//ãƒ•ãƒ­ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã‚’1ãšã¤å¢—ã‚„ã™
 				froorcount++;
 		}
 	}
 
-	/*@BGMƒtƒ@ƒCƒ‹ƒNƒ[ƒY@*/
-	mciSendString("close title", NULL, 0, NULL);	//ƒ^ƒCƒgƒ‹‰æ–Ê
-	mciSendString("close rule", NULL, 0, NULL);		//ƒ‹[ƒ‹à–¾
-	mciSendString("close bmenu", NULL, 0, NULL);	//‘Îíƒƒjƒ…[
-	mciSendString("close battle", NULL, 0, NULL);	//‘Îí
-	mciSendString("close story1", NULL, 0, NULL);	//ƒXƒg[ƒŠ[1
-	mciSendString("close story2", NULL, 0, NULL);	//ƒXƒg[ƒŠ[2
-	mciSendString("close story3", NULL, 0, NULL);	//ƒXƒg[ƒŠ[3
+	/*ã€€BGMãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚ºã€€*/
+	mciSendString("close title", NULL, 0, NULL);	//ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢
+	mciSendString("close rule", NULL, 0, NULL);		//ãƒ«ãƒ¼ãƒ«èª¬æ˜Ž
+	mciSendString("close bmenu", NULL, 0, NULL);	//å¯¾æˆ¦ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	mciSendString("close battle", NULL, 0, NULL);	//å¯¾æˆ¦
+	mciSendString("close story1", NULL, 0, NULL);	//ã‚¹ãƒˆãƒ¼ãƒªãƒ¼1
+	mciSendString("close story2", NULL, 0, NULL);	//ã‚¹ãƒˆãƒ¼ãƒªãƒ¼2
+	mciSendString("close story3", NULL, 0, NULL);	//ã‚¹ãƒˆãƒ¼ãƒªãƒ¼3
 
-	PlaySound("finishsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//Œø‰Ê‰¹
+	PlaySound("finishsound.wav", NULL, SND_FILENAME | SND_ASYNC);	//åŠ¹æžœéŸ³
 	TEXT_IRED;
-	printf("@Š@@@@@");TEXT_IBLUE;printf("‰\n");
+	printf("ã€€â™€ã€€ã€€ã€€ã€€ã€€");TEXT_IBLUE;printf("â™‚\n");
 	TEXT_GREEN;
-	printf("„¬„ª„²„¬„­„±„±„ª„­\n");
-	printf("„°„ª@„«„«„«„«@„«\n");
-	printf("„¯„ª„²„³„¯„®„³„ª„®\n\n");
+	printf("â”â”â”«â”â”“â”³â”³â”â”“\n");
+	printf("â”£â”ã€€â”ƒâ”ƒâ”ƒâ”ƒã€€â”ƒ\n");
+	printf("â”—â”â”«â”»â”—â”›â”»â”â”›\n\n");
 	Sleep( 1500 );
 
 	if( finish )
 	{
 		TEXT_BLACK;
-		printf("„¬„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„­\n");
-		printf("„«Šl“¾‚µ‚½");TEXT_GREEN;printf("™");TEXT_BLACK;printf("‚Ì”F%2d^%2d„«\n", getster, allster);
-		printf("„«POINTF%3d@@@@@@„«\n", point);
-		printf("„¯„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„®\n\n");
+		printf("â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+		printf("â”ƒç²å¾—ã—ãŸ");TEXT_GREEN;printf("â˜†");TEXT_BLACK;printf("ã®æ•°ï¼š%2dï¼%2dâ”ƒ\n", getster, allster);
+		printf("â”ƒPOINTï¼š%3dã€€ã€€ã€€ã€€ã€€ã€€â”ƒ\n", point);
+		printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”›\n\n");
 	}
 
 	return 0;
