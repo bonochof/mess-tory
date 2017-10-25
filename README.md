@@ -14,4 +14,4 @@ $ messtory.exe
 C
 
 ## 開発者
-[bonochof](https://githum.com/bonochof)
+[bonochof](https://github.com/bonochof)
